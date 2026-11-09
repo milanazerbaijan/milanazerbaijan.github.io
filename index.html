@@ -390,7 +390,10 @@ footer .wrap{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap}
 <script>
 /* ===== Ziyarətçi statistikası (Firebase Realtime Database) =====
    Firebase layihəsi yaradandan sonra aşağıdakı null-u öz konfiqurasiyanızla əvəz edin. */
-var FIREBASE_CONFIG = null;
+var FIREBASE_CONFIG = {
+  databaseURL: "https://milanazerbaijan-ce566-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "milanazerbaijan-ce566"
+};
 (function(){
   if(!FIREBASE_CONFIG||typeof firebase==='undefined')return;
   try{
