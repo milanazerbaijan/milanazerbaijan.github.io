@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-09T20:28:33Z",
+ "generated": "2026-11-09T20:50:22Z",
  "items": [
   {
    "id": "20261109-1950-1",
@@ -1003,67 +1003,67 @@
   }
  ],
  "serieA": {
-  "note": "11-ci tur davam edir",
+  "note": "11-ci turdan sonra",
   "rows": [
    {
-    "d": 1,
-    "ga": 8,
+    "d": 2,
+    "ga": 9,
     "gd": 16,
-    "gf": 24,
+    "gf": 25,
     "l": 0,
-    "p": 10,
+    "p": 11,
     "pos": 1,
-    "pts": 28,
+    "pts": 29,
     "team": "Lazio",
     "w": 9
    },
    {
     "d": 1,
     "ga": 13,
-    "gd": 13,
-    "gf": 26,
+    "gd": 15,
+    "gf": 28,
     "l": 1,
-    "p": 10,
+    "p": 11,
     "pos": 2,
-    "pts": 25,
+    "pts": 28,
     "team": "Inter",
-    "w": 8
+    "w": 9
    },
    {
     "d": 3,
     "ga": 10,
-    "gd": 18,
-    "gf": 28,
+    "gd": 21,
+    "gf": 31,
     "l": 0,
-    "p": 10,
+    "p": 11,
     "pos": 3,
-    "pts": 24,
+    "pts": 27,
     "team": "Roma",
+    "w": 8
+   },
+   {
+    "d": 3,
+    "ga": 13,
+    "gd": 10,
+    "gf": 23,
+    "l": 1,
+    "p": 11,
+    "pos": 4,
+    "pts": 24,
+    "team": "Milan",
     "w": 7
    },
    {
     "d": 2,
-    "ga": 8,
-    "gd": 10,
+    "ga": 10,
+    "gd": 8,
     "gf": 18,
-    "l": 1,
-    "p": 10,
-    "pos": 4,
+    "l": 2,
+    "p": 11,
+    "pos": 5,
     "pts": 23,
     "team": "Como",
     "w": 7
-   },
-   {
-    "d": 3,
-    "ga": 12,
-    "gd": 9,
-    "gf": 21,
-    "l": 1,
-    "p": 10,
-    "pos": 5,
-    "pts": 21,
-    "team": "Milan",
-    "w": 6
    },
    {
     "d": 2,
@@ -1078,15 +1078,27 @@
     "w": 6
    },
    {
-    "d": 2,
-    "ga": 10,
+    "d": 3,
+    "ga": 12,
     "gd": 3,
-    "gf": 13,
+    "gf": 15,
     "l": 3,
-    "p": 10,
+    "p": 11,
     "pos": 7,
-    "pts": 17,
+    "pts": 18,
     "team": "Juventus",
+    "w": 5
+   },
+   {
+    "d": 2,
+    "ga": 14,
+    "gd": 2,
+    "gf": 16,
+    "l": 4,
+    "p": 11,
+    "pos": 8,
+    "pts": 17,
+    "team": "Bologna",
     "w": 5
    },
    {
@@ -1096,40 +1108,28 @@
     "gf": 10,
     "l": 5,
     "p": 11,
-    "pos": 8,
+    "pos": 9,
     "pts": 16,
     "team": "Cagliari",
     "w": 5
    },
    {
-    "d": 2,
-    "ga": 13,
+    "d": 3,
+    "ga": 14,
     "gd": 4,
-    "gf": 17,
+    "gf": 18,
     "l": 4,
-    "p": 10,
-    "pos": 9,
-    "pts": 14,
+    "p": 11,
+    "pos": 10,
+    "pts": 15,
     "team": "Napoli",
     "w": 4
    },
    {
     "d": 2,
-    "ga": 13,
-    "gd": 1,
-    "gf": 14,
-    "l": 4,
-    "p": 10,
-    "pos": 10,
-    "pts": 14,
-    "team": "Bologna",
-    "w": 4
-   },
-   {
-    "d": 2,
-    "ga": 16,
+    "ga": 17,
     "gd": -2,
-    "gf": 14,
+    "gf": 15,
     "l": 5,
     "p": 11,
     "pos": 11,
@@ -1138,34 +1138,34 @@
     "w": 4
    },
    {
-    "d": 1,
-    "ga": 14,
-    "gd": -4,
-    "gf": 10,
+    "d": 2,
+    "ga": 20,
+    "gd": -3,
+    "gf": 17,
     "l": 5,
-    "p": 10,
+    "p": 11,
     "pos": 12,
+    "pts": 14,
+    "team": "Atalanta",
+    "w": 4
+   },
+   {
+    "d": 1,
+    "ga": 16,
+    "gd": -5,
+    "gf": 11,
+    "l": 6,
+    "p": 11,
+    "pos": 13,
     "pts": 13,
     "team": "Genoa",
     "w": 4
    },
    {
-    "d": 2,
-    "ga": 20,
-    "gd": -4,
-    "gf": 16,
-    "l": 5,
-    "p": 10,
-    "pos": 13,
-    "pts": 11,
-    "team": "Atalanta",
-    "w": 3
-   },
-   {
     "d": 1,
-    "ga": 21,
+    "ga": 22,
     "gd": -10,
-    "gf": 11,
+    "gf": 12,
     "l": 7,
     "p": 11,
     "pos": 14,
@@ -1174,36 +1174,36 @@
     "w": 3
    },
    {
-    "d": 2,
-    "ga": 15,
-    "gd": -7,
-    "gf": 8,
+    "d": 3,
+    "ga": 25,
+    "gd": -8,
+    "gf": 17,
     "l": 6,
-    "p": 10,
+    "p": 11,
     "pos": 15,
+    "pts": 9,
+    "team": "Fiorentina",
+    "w": 2
+   },
+   {
+    "d": 2,
+    "ga": 17,
+    "gd": -8,
+    "gf": 9,
+    "l": 7,
+    "p": 11,
+    "pos": 16,
     "pts": 8,
     "team": "Parma",
     "w": 2
    },
    {
     "d": 2,
-    "ga": 23,
-    "gd": -8,
-    "gf": 15,
-    "l": 6,
-    "p": 10,
-    "pos": 16,
-    "pts": 8,
-    "team": "Fiorentina",
-    "w": 2
-   },
-   {
-    "d": 2,
-    "ga": 26,
-    "gd": -10,
+    "ga": 29,
+    "gd": -13,
     "gf": 16,
-    "l": 6,
-    "p": 10,
+    "l": 7,
+    "p": 11,
     "pos": 17,
     "pts": 8,
     "team": "Sassuolo",
@@ -1211,11 +1211,11 @@
    },
    {
     "d": 1,
-    "ga": 24,
-    "gd": -7,
+    "ga": 25,
+    "gd": -8,
     "gf": 17,
-    "l": 7,
-    "p": 10,
+    "l": 8,
+    "p": 11,
     "pos": 18,
     "pts": 7,
     "team": "Monza",
@@ -1246,10 +1246,10 @@
     "w": 1
    }
   ],
-  "source": "Sky Sport Italia",
-  "sourceUrl": "https://sport.sky.it/calcio/serie-a/classifica",
+  "source": "DAZN Italia",
+  "sourceUrl": "https://www.dazn.com/it-IT/news/calcio/classifica-serie-a-aggiornata/1ae86cqx9wpxe1ltiy5kwpuxtd",
   "title": "Seriya A",
-  "updatedAt": "2026-11-07T19:30:00Z",
+  "updatedAt": "2026-11-09T20:30:00Z",
   "zones": [
    {
     "cls": "z1",
@@ -1712,15 +1712,15 @@
    {
     "player": "Strahinja Pavlović",
     "pos": "MD",
-    "reason": "Kəskin sancılar səbəbindən heyətə daxil edilməyib",
-    "ret": "Genoa oyununu buraxır, sonrası bəlli deyil",
+    "reason": "Çiyində narahatlıq; Serbiya millisinə getmir, Milanda bərpa olunur",
+    "ret": "Frosinone oyunu (22 noyabr) və ya bir həftə sonra",
     "status": "injured"
    },
    {
     "player": "Fikayo Tomori",
     "pos": "MD",
-    "reason": "Sağ budun daxili arxa əzələsində zədə (Bologna oyunu)",
-    "ret": "dekabr (təxminən 1 ay)",
+    "reason": "Sağ budun arxa əzələsində zədə; yenidən müayinə olunacaq",
+    "ret": "hədəf: Frosinone oyunu (22 noyabr) və ya Olympiacos/Cagliari oyunları",
     "status": "injured"
    },
    {
@@ -1733,8 +1733,8 @@
    {
     "player": "Ruben Loftus-Cheek",
     "pos": "YM",
-    "reason": "Sol budun daxili arxa əzələsində zədə",
-    "ret": "milli komanda fasiləsindən sonra",
+    "reason": "Sol budun arxa əzələsində zədə; yenidən müayinə olunacaq",
+    "ret": "hədəf: Frosinone oyunu (22 noyabr) və ya Olympiacos/Cagliari oyunları",
     "status": "injured"
    },
    {
@@ -1759,22 +1759,22 @@
     "status": "injured"
    }
   ],
-  "note": "Genoa – Milan oyunundan əvvəl",
-  "source": "Calciomercato.com, DAZN, Radio Rossonera",
-  "sourceUrl": "https://www.calciomercato.com/liste/milan-da-chukwueze-a-loftus-cheek-tomori-e-gabbia-quando-tornano-gli-infortunati-e-i-tempi-di-recupero/blt202d5529672ba4b5",
-  "updatedAt": "2026-11-07T20:00:00Z"
+  "note": "Genoa – Milan oyunundan sonra",
+  "source": "Gazzetta dello Sport (Radio Rossonera-ya istinadən), Calciomercato.com",
+  "sourceUrl": "https://www.radiorossonera.it/news/269105925638/milan-pavlovic-tomori-loftus-cheek-rientro-infortuni-frosinone",
+  "updatedAt": "2026-11-09T20:30:00Z"
  },
  "scorers": {
-  "note": "Seriya A, 10 tur",
+  "note": "Seriya A, 11 tur",
   "players": [
    {
-    "assists": 3,
+    "assists": 4,
     "goals": 5,
     "player": "Adrien Rabiot"
    },
    {
     "assists": 0,
-    "goals": 4,
+    "goals": 5,
     "player": "Alphadjo Cissè"
    },
    {
@@ -1784,11 +1784,11 @@
    },
    {
     "assists": 1,
-    "goals": 3,
+    "goals": 4,
     "player": "Christian Pulisic"
    },
    {
-    "assists": 1,
+    "assists": 2,
     "goals": 2,
     "player": "Gonçalo Ramos"
    },
@@ -1828,8 +1828,8 @@
     "player": "Strahinja Pavlović"
    }
   ],
-  "source": "VAVEL",
-  "sourceUrl": "https://www.vavel.com/en/data/ac-milan/stats/",
-  "updatedAt": "2026-11-07T20:00:00Z"
+  "source": "VAVEL + SempreMilan (Genoa – Milan hesabatı)",
+  "sourceUrl": "https://sempremilan.com/genoa-1-2-ac-milan-report-2026-27",
+  "updatedAt": "2026-11-09T20:30:00Z"
  }
 }
