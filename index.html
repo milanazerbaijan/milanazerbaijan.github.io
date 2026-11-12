@@ -68,16 +68,19 @@ button{font:inherit;color:inherit}
 /* list */
 .tag{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--tag-ink);background:var(--tag-bg);padding:3px 8px;border-radius:6px}
 .meta{font-size:13px;color:var(--ink-3);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.lead{display:block;text-decoration:none;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:28px;box-shadow:var(--shadow);position:relative;overflow:hidden;margin-bottom:22px}
+.lead{display:block;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:28px;box-shadow:var(--shadow);position:relative;overflow:hidden;margin-bottom:22px}
 .lead:before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--red)}
 .lead h2{font-size:clamp(24px,3.6vw,36px);line-height:1.15;letter-spacing:-.025em;margin:14px 0 12px;font-weight:800;text-wrap:balance}
 .lead p{margin:0 0 16px;color:var(--ink-2);font-size:17px;max-width:70ch}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
-.card{display:flex;flex-direction:column;gap:10px;text-decoration:none;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;transition:border-color .15s,transform .15s}
+.card{display:flex;flex-direction:column;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;transition:border-color .15s,transform .15s}
 .card:hover,.lead:hover{border-color:var(--ink-3)}
 .card h3{margin:0;font-size:17.5px;line-height:1.3;letter-spacing:-.01em;font-weight:700;text-wrap:pretty}
 .card p{margin:0;color:var(--ink-2);font-size:14.5px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .card .meta{margin-top:auto}
+a.card{text-decoration:none}
+a.cl{display:flex;flex-direction:column;gap:10px;text-decoration:none;flex:1;min-width:0}
+.lead a.cl{display:block}
 .day{grid-column:1/-1;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);padding:14px 2px 0;display:flex;align-items:center;gap:10px}
 .day:after{content:"";flex:1;height:1px;background:var(--line)}
 .more{display:block;margin:22px auto 0;border:1px solid var(--line);background:var(--surface);border-radius:11px;padding:11px 20px;font-weight:600;cursor:pointer}
@@ -167,16 +170,36 @@ footer .wrap{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap}
 .stats .sep{color:var(--line)}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(34,165,90,.45)}70%{box-shadow:0 0 0 7px rgba(34,165,90,0)}100%{box-shadow:0 0 0 0 rgba(34,165,90,0)}}
 
-/* mobile tabs */
-.tabs{display:none}
+/* tabs */
+.tabs{display:flex;gap:4px;padding:14px 0 0;max-width:420px}
+.tabs a{flex:1;text-align:center;text-decoration:none;font-weight:700;font-size:14px;padding:9px 0;border-radius:10px;color:var(--ink-2);border:1px solid var(--line);background:var(--surface)}
+.tabs a.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tabs a.mob{display:none}
 @media (max-width:979px){
   .layout{grid-template-columns:minmax(0,1fr)}
   .layout .aside{display:none}
-  .tabs{display:flex;gap:4px;padding:10px 0 0}
-  .tabs a{flex:1;text-align:center;text-decoration:none;font-weight:700;font-size:14px;padding:9px 0;border-radius:10px;color:var(--ink-2);border:1px solid var(--line);background:var(--surface)}
-  .tabs a.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+  .tabs{max-width:none;padding-top:10px}
+  .tabs a.mob{display:block}
   .aside.page{display:flex;position:static;max-height:none;overflow:visible}
 }
+
+/* reactions */
+.rx{display:none;flex-wrap:wrap;gap:5px}
+.rx-on .rx{display:flex}
+.rb{display:inline-flex;align-items:center;gap:5px;height:32px;padding:0 8px;border-radius:999px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-size:13px;font-weight:700;color:var(--ink-2);font-variant-numeric:tabular-nums;transition:border-color .15s,background .15s,transform .1s}
+.rb:hover{border-color:var(--ink-3)}
+.rb:active{transform:scale(.94)}
+.rb .e{font-size:16px;line-height:1}
+.rb .n:empty{display:none}
+.rb[aria-pressed="true"]{background:var(--tag-bg);border-color:var(--red);color:var(--tag-ink)}
+.rb:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.lead .rx{margin-top:16px}
+.rxbox{margin-top:26px;padding-top:20px;border-top:1px solid var(--line)}
+.rxbox h4{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:0 0 10px;display:none}
+.rx-on .rxbox h4{display:block}
+
+/* about */
+.about .body p:last-child{font-family:Inter,system-ui,sans-serif;font-weight:800;font-size:18px}
 @media (max-width:600px){
   .stats .wide{display:none}
 }
@@ -244,8 +267,8 @@ footer .wrap{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap}
   function svg(k,cls){var p=ICON[k]||ICON._;return '<svg class="'+(cls||'ic')+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+p+'</svg>'}
   function tag(k){k=k||'Xəbər';return '<span class="tag">'+svg(k)+esc(k)+'</span>'}
   function dot(n){var t=TEAM[n];var a=t?t[1]:'#9aa0a6',b=t?t[2]:'#d5d8dc';return '<span class="tb" style="background:linear-gradient(135deg,'+a+' 0 50%,'+b+' 50% 100%)" aria-hidden="true"></span>'}
-  function logoUrl(n,px){var L=window.LOGOS||{};var id=L[n];return id?'https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/'+id+'.png&h='+px+'&w='+px:null}
-  function crest(n){var u=logoUrl(n,48);if(!u)return dot(n);return '<img class="tl" src="'+u+'" alt="" width="18" height="18" loading="lazy" referrerpolicy="no-referrer" data-team="'+esc(n)+'">'}
+  function logoUrl(n,px){var L=window.LOGOS||{};var id=Object.prototype.hasOwnProperty.call(L,n)?L[n]:null;if(!/^[0-9]+$/.test(String(id)))id=null;return id?'https://a.espncdn.com/combiner/i?img=/i/teamlogos/soccer/500/'+id+'.png&h='+px+'&w='+px:null}
+  function crest(n){var u=logoUrl(n,48);if(!u)return dot(n);return '<img class="tl" src="'+esc(u)+'" alt=""" width="18" height="18" loading="lazy" referrerpolicy="no-referrer" data-team="'+esc(n)+'">'}
   function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
   function baku(iso){var d=new Date(iso);if(isNaN(d))return null;return new Date(d.getTime()+4*3600*1000)}
   function pad(n){return n<10?'0'+n:''+n}
@@ -267,7 +290,10 @@ footer .wrap{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap}
   }
 
 
-  function tabs(on){return '<nav class="tabs" aria-label="Bölmələr"><a href="#/" class="'+(on==='x'?'on':'')+'">Xəbərlər</a><a href="#/cedvel" class="'+(on==='c'?'on':'')+'">Cədvəl və statistika</a></nav>'}
+  function tabs(on){return '<nav class="tabs" aria-label="Bölmələr"><a href="#/" class="'+(on==='x'?'on':'')+'">Xəbərlər</a><a href="#/cedvel" class="mob '+(on==='c'?'on':'')+'">Cədvəl</a><a href="#/haqqimizda" class="'+(on==='h'?'on':'')+'">Haqqımızda</a></nav>'}
+  var REACTS=[['like','👍','Bəyəndim'],['dislike','👎','Bəyənmədim'],['love','❤️','Sevdim'],['fire','🔥','Möhtəşəm'],['wow','😮','Təəccüblü'],['sad','😢','Kədərli']];
+  function rxBar(id){return '<div class="rx" data-rx="'+esc(id)+'" role="group" aria-label="Reaksiyalar">'+REACTS.map(function(r){return '<button type="button" class="rb" data-r="'+r[0]+'" aria-pressed="false" title="'+r[2]+'" aria-label="'+r[2]+'"><span class="e" aria-hidden="true">'+r[1]+'</span><span class="n"></span></button>'}).join('')+'</div>'}
+  function rendered(){try{document.dispatchEvent(new Event('ma:render'))}catch(e){}}
   function foot(o){if(!o)return'';var u=safeUrl(o.sourceUrl);var t=o.updatedAt?'Yeniləndi: '+dayLabel(o.updatedAt)+', '+timeLabel(o.updatedAt):'';return '<div class="foot">'+(o.source?'Mənbə: '+(u?'<a href="'+esc(u)+'" target="_blank" rel="noopener noreferrer">'+esc(o.source)+'</a>':esc(o.source)):'')+(t?'<br>'+esc(t):'')+'</div>'}
   function zoneOf(z,p){for(var i=0;i<(z||[]).length;i++)if(p>=z[i].from&&p<=z[i].to)return z[i].cls;return''}
   function legend(z){return '<div class="legend">'+(z||[]).map(function(x){var c={z1:'#1f8f4e',z2:'#d08a12',z3:'var(--red)'}[x.cls]||'#999';return '<span><i style="background:'+c+'"></i>'+esc(x.label)+'</span>'}).join('')+'</div>'}
@@ -293,7 +319,7 @@ footer .wrap{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap}
     if(!list.length)return'';
     return '<div class="w"><h5>Növbəti oyunlar</h5><p class="sub">Vaxtlar Bakı vaxtı ilə</p>'+list.map(function(f){
       var d=f.utc?'<b>'+esc(dayLabel(f.utc).replace(/ \d{4}$/,''))+'</b>'+esc(timeLabel(f.utc)):'<b>'+esc(dayLabel((f.date||'')+'T08:00:00Z').replace(/ \d{4}$/,''))+'</b>vaxt bəlli deyil';
-      return '<div class="fx">'+(logoUrl(f.opp,80)?'<span class="badge lg"><img src="'+logoUrl(f.opp,80)+'" alt="'+esc(f.opp)+'" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" data-short="'+esc(f.short||'')+'" data-c1="'+esc(f.c1||'#444')+'" data-c2="'+esc(f.c2||'#fff')+'"></span>':'<span class="badge" style="background:'+esc(f.c1||'#444')+';color:'+esc(f.c2||'#fff')+'">'+esc(f.short||'')+'</span>')+'<span class="t"><b>'+(f.home?'Milan – '+esc(f.opp):esc(f.opp)+' – Milan')+'</b><span>'+esc(f.comp||'')+(f.venue?' · '+esc(f.venue):'')+'</span></span><span class="d">'+d+'</span></div>';
+      return '<div class="fx">'+(logoUrl(f.opp,80)?'<span class="badge lg"><img src="'+esc(logoUrl(f.opp,80))+'" alt=""'+esc(f.opp)+'" width="28" height="28" loading="lazy" referrerpolicy="no-referrer" data-short="'+esc(f.short||'')+'" data-c1="'+esc(f.c1||'#444')+'" data-c2="'+esc(f.c2||'#fff')+'"></span>':'<span class="badge" style="background:'+esc(f.c1||'#444')+';color:'+esc(f.c2||'#fff')+'">'+esc(f.short||'')+'</span>')+'<span class="t"><b>'+(f.home?'Milan – '+esc(f.opp):esc(f.opp)+' – Milan')+'</b><span>'+esc(f.comp||'')+(f.venue?' · '+esc(f.venue):'')+'</span></span><span class="d">'+d+'</span></div>';
     }).join('')+foot(o)+'</div>';
   }
   function scorers(o){
@@ -327,11 +353,11 @@ footer .wrap{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap}
     if(!shown.length){h+='<div class="empty">Heç nə tapılmadı.</div>'}
     else{
       var lead=shown[0];
-      h+='<a class="lead" href="#/xeber/'+encodeURIComponent(lead.id)+'">'+tag(lead.kind)+'<h2>'+esc(lead.title)+'</h2><p>'+esc(firstPara(lead.body))+'</p>'+meta(lead)+'</a>';
+      h+='<div class="lead"><a class="cl" href="#/xeber/'+encodeURIComponent(lead.id)+'">'+tag(lead.kind)+'<h2>'+esc(lead.title)+'</h2><p>'+esc(firstPara(lead.body))+'</p>'+meta(lead)+'</a>'+rxBar(lead.id)+'</div>';
       h+='<div class="grid">';var last=dayLabel(lead.date);
       shown.slice(1).forEach(function(it){
         var d=dayLabel(it.date);if(d!==last){h+='<div class="day">'+esc(d)+'</div>';last=d}
-        h+='<a class="card" href="#/xeber/'+encodeURIComponent(it.id)+'"><span>'+tag(it.kind)+'</span><h3>'+esc(it.title)+'</h3><p>'+esc(firstPara(it.body))+'</p>'+meta(it)+'</a>';
+        h+='<div class="card"><a class="cl" href="#/xeber/'+encodeURIComponent(it.id)+'"><span>'+tag(it.kind)+'</span><h3>'+esc(it.title)+'</h3><p>'+esc(firstPara(it.body))+'</p>'+meta(it)+'</a>'+rxBar(it.id)+'</div>';
       });
       h+='</div>';
       if(list.length>shown.length)h+='<button class="more" id="more" type="button">Daha çox xəbər</button>';
@@ -341,7 +367,8 @@ footer .wrap{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap}
     var q=document.getElementById('q');
     q.oninput=function(){state.q=q.value;state.limit=30;var p=q.selectionStart;renderList();var n=document.getElementById('q');n.focus();try{n.setSelectionRange(p,p)}catch(e){}};
     Array.prototype.forEach.call(app.querySelectorAll('.chip'),function(b){b.onclick=function(){state.kind=b.getAttribute('data-k');state.limit=30;renderList()}});
-    var m=document.getElementById('more');if(m)m.onclick=function(){state.limit+=30;renderList()};
+    var m=document.getElementById('more');if(m)m.onclick=function(){var y=window.scrollY;state.limit+=30;renderList();window.scrollTo(0,y)};
+    rendered();
   }
 
   function renderArticle(id){
@@ -356,10 +383,26 @@ footer .wrap{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap}
     if(lede)h+='<p class="lede">'+esc(lede).replace(/\n/g,'<br>')+'</p>';
     h+='<div class="body">'+paras.map(function(p){return '<p>'+esc(p).replace(/\n/g,'<br>')+'</p>'}).join('')+'</div>';
     if(it.source)h+='<div class="srcbox">Əsas mənbə: <strong>'+esc(it.source)+'</strong>'+(src?'<br><a href="'+esc(src)+'" target="_blank" rel="noopener noreferrer">Orijinal məqaləni oxu ↗</a>':'')+'</div>';
+    h+='<div class="rxbox"><h4>Bu xəbərə reaksiyanız</h4>'+rxBar(it.id)+'</div>';
     var rel=DATA.filter(function(x){return x.id!==it.id&&x.kind===it.kind}).slice(0,3);
     if(rel.length)h+='<div class="related"><h4>Oxşar xəbərlər</h4><div class="grid">'+rel.map(function(x){return '<a class="card" href="#/xeber/'+encodeURIComponent(x.id)+'"><h3>'+esc(x.title)+'</h3>'+meta(x)+'</a>'}).join('')+'</div></div>';
     h+='</article>';
     app.innerHTML=h;window.scrollTo(0,0);
+    rendered();
+  }
+
+  var ABOUT=[
+    'Salam, Rossonerilər! 🔴⚫',
+    'Biz Milanı sevən azərbaycanlı azarkeşlərik. Uzun illərdir klubla bağlı xəbərləri vaxtında tapmaqda və onları öz ana dilimizdə oxumaqda çətinlik çəkirdik. Qrup söhbətlərində vacib xəbərlər tez-tez itib-batırdı, işdən yorğun gələndə isə onları bir-bir axtarmağa nə vaxt, nə də həvəs qalırdı.',
+    'Bu sayt məhz buna görə yarandı. Burada Milanla bağlı ən vacib xəbərləri — transferləri, zədələri, mətbuat konfranslarını, müsahibələri və oyun nəticələrini — bir yerə toplayır və Azərbaycan dilində təqdim edirik. Turnir cədvəli, təqvim, zədəli oyunçular və bombardirlər siyahısı da gün ərzində yenilənir.',
+    'Xəbərləri rəsmi klub mənbələrindən və etibarlı jurnalistlərdən seçirik. Hər xəbərin altında əsas mənbə göstərilir, şayiələr isə ayrıca "İddia" kimi qeyd olunur.',
+    'Bu, qeyri-rəsmi azarkeş saytıdır və AC Milan klubu ilə heç bir rəsmi əlaqəsi yoxdur.',
+    'Forza Milan! 🖤❤️'
+  ];
+  function renderAbout(){
+    document.title='Haqqımızda — Milan Azərbaycan';
+    app.innerHTML=tabs('h')+'<article class="article about"><h1>Haqqımızda</h1><div class="body">'+ABOUT.map(function(p){return '<p>'+esc(p)+'</p>'}).join('')+'</div></article>';
+    window.scrollTo(0,0);
   }
 
   var listScroll=0;
@@ -367,6 +410,7 @@ footer .wrap{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap}
     var m=location.hash.match(/^#\/xeber\/(.+)$/);
     if(m){renderArticle(decodeURIComponent(m[1]))}
     else if(location.hash==='#/cedvel'){renderTables()}
+    else if(location.hash==='#/haqqimizda'){renderAbout()}
     else{renderList();window.scrollTo(0,listScroll)}
   }
   document.addEventListener('error',function(e){var im=e.target;if(!im||im.tagName!=='IMG')return;
@@ -410,6 +454,44 @@ var FIREBASE_CONFIG = {
       db.ref('stats/days/'+today).transaction(function(v){return (v||0)+1});
       try{localStorage.setItem('ma-seen',today)}catch(e){}
     }
+    /* ===== Reaksiyalar: reactions/<xəbər id>/<ziyarətçi id> = "like" | ... =====
+       Hər ziyarətçi hər xəbərə yalnız bir reaksiya verə bilər (eyni düyməyə yenidən basmaq onu geri alır, başqasına basmaq dəyişir). */
+    var OK={like:1,dislike:1,love:1,fire:1,wow:1,sad:1};
+    var VID=null;try{VID=localStorage.getItem('ma-vid')}catch(e){}
+    if(!VID||!/^[a-z0-9]{20}$/.test(VID)){
+      var a='abcdefghijklmnopqrstuvwxyz0123456789',r=new Uint8Array(20),v='';
+      try{crypto.getRandomValues(r)}catch(e){for(var i=0;i<20;i++)r[i]=Math.floor(Math.random()*256)}
+      for(var j=0;j<20;j++)v+=a[r[j]%36];VID=v;
+      try{localStorage.setItem('ma-vid',VID)}catch(e){}
+    }
+    var RX={},MINE={},watched={};
+    function idOk(x){return typeof x==='string'&&x.length<=20&&/^[0-9-]+$/.test(x)}
+    function paint(id){
+      var c=RX[id]||{};
+      Array.prototype.forEach.call(document.querySelectorAll('.rx[data-rx="'+id+'"] .rb'),function(b){
+        var k=b.getAttribute('data-r');b.querySelector('.n').textContent=c[k]?c[k]:'';
+        b.setAttribute('aria-pressed',MINE[id]===k?'true':'false');
+      });
+    }
+    function watch(id){
+      if(watched[id]||!idOk(id))return;watched[id]=1;
+      db.ref('reactions/'+id).on('value',function(s){
+        var c={};s.forEach(function(ch){var v=ch.val();if(OK[v])c[v]=(c[v]||0)+1});
+        RX[id]=c;var m=s.child(VID).val();MINE[id]=OK[m]?m:null;
+        document.documentElement.classList.add('rx-on');paint(id);
+      },function(){});
+    }
+    function scan(){Array.prototype.forEach.call(document.querySelectorAll('.rx[data-rx]'),function(b){var id=b.getAttribute('data-rx');watch(id);if(RX[id])paint(id)})}
+    document.addEventListener('ma:render',scan);scan();
+    document.addEventListener('click',function(e){
+      var b=e.target.closest&&e.target.closest('.rx .rb');if(!b)return;
+      e.preventDefault();
+      var id=b.closest('.rx').getAttribute('data-rx'),k=b.getAttribute('data-r');
+      if(!idOk(id)||!OK[k])return;
+      var ref=db.ref('reactions/'+id+'/'+VID);
+      (MINE[id]===k?ref.remove():ref.set(k)).catch(function(){});
+    });
+
     var weekStart=bakuDay(Date.now()-6*86400000);
     db.ref('stats/days').orderByKey().startAt(weekStart).on('value',function(s){
       var w=0,t=0;s.forEach(function(c){var v=+c.val()||0;w+=v;if(c.key===today)t=v});
