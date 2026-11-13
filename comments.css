@@ -1,0 +1,70 @@
+/* giriş düyməsi */
+.acct{height:40px;border-radius:10px;border:1px solid var(--line);background:var(--surface);display:inline-flex;align-items:center;gap:7px;padding:0 12px;cursor:pointer;font-weight:600;font-size:14px;max-width:170px;flex:none}
+.acct:hover{border-color:var(--ink-3)}
+.acct[hidden]{display:none}
+.acct svg{width:18px;height:18px;flex:none}
+.acct span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media (max-width:600px){.acct{width:40px;padding:0;justify-content:center}.acct span{display:none}}
+
+/* düymələr */
+.btn{height:38px;padding:0 16px;border-radius:10px;border:0;background:var(--red);color:#fff;font-weight:700;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;gap:9px;white-space:nowrap}
+.btn:hover{background:var(--red-ink)}
+.btn:disabled{opacity:.55;cursor:default}
+.btn.gbtn{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
+.btn.gbtn:hover{border-color:var(--ink-3);background:var(--surface)}
+.btn.gbtn svg{width:18px;height:18px}
+.lnk{border:0;background:none;padding:4px 0;color:var(--ink-3);font-weight:600;font-size:13px;cursor:pointer}
+.lnk:hover{color:var(--ink)}
+.lnk.dng:hover{color:var(--red-ink)}
+.btn:focus-visible,.lnk:focus-visible,.acct:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+
+/* şərhlər */
+.cmts{margin-top:30px;padding-top:20px;border-top:1px solid var(--line)}
+.cmh{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:0 0 12px;font-weight:700}
+.cmgate{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 14px}
+.cmgate p{margin:0;color:var(--ink-2);font-size:14.5px}
+.cmas{margin:0 0 8px;font-size:13px;color:var(--ink-3)}
+.cmas b{color:var(--ink)}
+.cmf textarea{display:block;width:100%;min-height:72px;resize:vertical;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);font:inherit;font-size:15px;line-height:1.45;padding:10px 12px;outline:none}
+.cmf textarea:focus{border-color:var(--red)}
+.cmfb{display:flex;align-items:center;gap:12px;margin-top:8px;flex-wrap:wrap}
+.cnt{font-size:12px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.cnt.lim{color:var(--red-ink);font-weight:700}
+.msg{flex:1;min-width:0;font-size:12.5px;color:var(--red-ink)}
+.cm .cmf{margin-top:8px}
+#cmList{margin-top:16px}
+.cmn{border-top:1px solid var(--line)}
+.cmk .cmn{border-top:0}
+.cm{padding:12px 0 4px}
+.cmk .cm{padding:10px 0 2px}
+.cmk.ind{margin-left:10px;padding-left:12px;border-left:2px solid var(--line)}
+.cmhd{display:flex;align-items:baseline;gap:4px 8px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-3)}
+.cmhd b{font-size:14.5px;color:var(--ink);font-weight:700;word-break:break-all}
+.bdg{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;background:var(--tag-bg);color:var(--tag-ink);padding:1px 6px;border-radius:5px;vertical-align:1px}
+.bdg.dark{background:var(--chip);color:var(--ink-2)}
+.cmto{font-size:12.5px;color:var(--ink-3);margin-top:2px}
+.cmt{margin:4px 0 2px;font-size:15.5px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}
+.cmt.hid{color:var(--ink-3)}
+.cmx{margin:4px 0;font-size:14px;color:var(--ink-3);font-style:italic}
+.cma{display:flex;gap:4px 14px;flex-wrap:wrap}
+.cmempty{color:var(--ink-3);font-size:14.5px;padding:6px 0;margin:0}
+.lnk.more{display:block;margin:6px 0 4px;color:var(--red-ink)}
+#cmList>.more{margin-top:14px}
+
+/* dialoq */
+dialog.cmd{border:1px solid var(--line);border-radius:16px;background:var(--surface);color:var(--ink);padding:22px;width:min(420px,calc(100vw - 32px));box-shadow:0 12px 40px rgba(0,0,0,.25)}
+dialog.cmd::backdrop{background:rgba(0,0,0,.45)}
+.cmd h3{margin:0 0 8px;font-size:19px;letter-spacing:-.01em}
+.cmd p{margin:0 0 12px;color:var(--ink-2);font-size:14px;line-height:1.5}
+.cmd p b{color:var(--ink)}
+.cmd input{width:100%;height:44px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit;font-size:16px;padding:0 12px;outline:none}
+.cmd input:focus{border-color:var(--red)}
+.cmd .hint{font-size:12.5px;color:var(--ink-3);margin:6px 0 0}
+.cmd .err,.cmd .errc{color:var(--red-ink);font-size:13px;margin:6px 0 0}
+.cmd .err:empty{display:none}
+.cmd .row{display:flex;justify-content:flex-end;align-items:center;gap:16px;margin-top:16px;flex-wrap:wrap}
+
+/* dar telefonlarda başlıq sığsın */
+@media (max-width:440px){.top .stats .ol{display:none}.top .stats{padding:6px 10px}.top .wrap{gap:8px}}
+@media (max-width:400px){.top .wrap{gap:6px}.top .brand{gap:7px}.top .brand b{font-size:15px}.top .mark{height:34px}.top .iconbtn,.top .acct{width:36px;height:36px}.top .stats{padding:6px 9px}}
+@media (max-width:350px){.top .stats{display:none}}

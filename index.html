@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="comments.css">
 <script>
   (function(){var t=null;try{t=localStorage.getItem('ma-theme')}catch(e){}
   if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);})();
@@ -227,7 +228,8 @@ footer .wrap{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap}
       <b>Milan <span>Azərbaycan</span></b>
     </a>
     <span class="spacer"></span>
-    <div class="stats" id="stats" hidden title="Sayt statistikası"><span class="dot"></span><b id="sOn">0</b>&nbsp;onlayn<span class="wide"><span class="sep">&nbsp;|&nbsp;</span>Bu gün <b id="sDay">0</b><span class="sep">&nbsp;|&nbsp;</span>Bu həftə <b id="sWeek">0</b></span></div>
+    <div class="stats" id="stats" hidden title="Sayt statistikası"><span class="dot"></span><b id="sOn">0</b><span class="ol">&nbsp;onlayn</span><span class="wide"><span class="sep">&nbsp;|&nbsp;</span>Bu gün <b id="sDay">0</b><span class="sep">&nbsp;|&nbsp;</span>Bu həftə <b id="sWeek">0</b></span></div>
+    <button class="acct" id="acctBtn" type="button" hidden></button>
     <button class="iconbtn" id="themeBtn" type="button" aria-label="Rejimi dəyiş" title="İşıqlı / qaranlıq rejim"></button>
   </div>
   <div class="stripe"></div>
@@ -384,6 +386,7 @@ footer .wrap{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap}
     h+='<div class="body">'+paras.map(function(p){return '<p>'+esc(p).replace(/\n/g,'<br>')+'</p>'}).join('')+'</div>';
     if(it.source)h+='<div class="srcbox">Əsas mənbə: <strong>'+esc(it.source)+'</strong>'+(src?'<br><a href="'+esc(src)+'" target="_blank" rel="noopener noreferrer">Orijinal məqaləni oxu ↗</a>':'')+'</div>';
     h+='<div class="rxbox"><h4>Bu xəbərə reaksiyanız</h4>'+rxBar(it.id)+'</div>';
+    h+='<section class="cmts" id="cmts" data-item="'+esc(it.id)+'" aria-label="Şərhlər"></section>';
     var rel=DATA.filter(function(x){return x.id!==it.id&&x.kind===it.kind}).slice(0,3);
     if(rel.length)h+='<div class="related"><h4>Oxşar xəbərlər</h4><div class="grid">'+rel.map(function(x){return '<a class="card" href="#/xeber/'+encodeURIComponent(x.id)+'"><h3>'+esc(x.title)+'</h3>'+meta(x)+'</a>'}).join('')+'</div></div>';
     h+='</article>';
@@ -431,10 +434,14 @@ footer .wrap{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap}
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script>
 /* ===== Ziyarətçi statistikası (Firebase Realtime Database) =====
    Firebase layihəsi yaradandan sonra aşağıdakı null-u öz konfiqurasiyanızla əvəz edin. */
 var FIREBASE_CONFIG = {
+  apiKey: "AIzaSyDhlz79GXffiBuR0_pci5yhOMB1QYqXTuU",
+  authDomain: "milanazerbaijan-ce566.firebaseapp.com",
+  appId: "1:660585789971:web:d8b88daf797bcca858dde6",
   databaseURL: "https://milanazerbaijan-ce566-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "milanazerbaijan-ce566"
 };
@@ -500,5 +507,6 @@ var FIREBASE_CONFIG = {
   }catch(e){}
 })();
 </script>
+<script src="comments.js"></script>
 </body>
 </html>

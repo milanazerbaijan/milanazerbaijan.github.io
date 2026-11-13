@@ -1,0 +1,107 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+
+    "presence": {
+      ".read": true,
+      "$id": {
+        ".write": true,
+        ".validate": "$id.matches(/^[a-z0-9]+$/) && $id.length <= 32 && newData.val() === true"
+      }
+    },
+
+    "stats": {
+      "days": {
+        ".read": true,
+        "$day": {
+          ".write": true,
+          ".validate": "$day.matches(/^[0-9-]+$/) && $day.length === 10 && newData.isNumber() && newData.val() === (data.exists() ? data.val() + 1 : 1)"
+        }
+      }
+    },
+
+    "reactions": {
+      "$item": {
+        ".read": "$item.matches(/^[0-9-]+$/) && $item.length <= 20",
+        "$vid": {
+          ".write": "$item.matches(/^[0-9-]+$/) && $item.length <= 20 && $vid.matches(/^[a-z0-9]+$/) && $vid.length === 20",
+          ".validate": "newData.isString() && (newData.val() === 'like' || newData.val() === 'dislike' || newData.val() === 'love' || newData.val() === 'fire' || newData.val() === 'wow' || newData.val() === 'sad')"
+        }
+      }
+    },
+
+    "roles": {
+      "$uid": {
+        ".read": true
+      }
+    },
+
+    "profiles": {
+      "$uid": {
+        ".read": true,
+        ".write": "auth != null && auth.uid === $uid && newData.exists()",
+        ".validate": "newData.hasChildren(['n'])",
+        "n": {
+          ".validate": "newData.isString() && newData.val().matches(/^[A-Za-z0-9_]+$/) && newData.val().length >= 3 && newData.val().length <= 20 && newData.parent().parent().parent().child('nicks').child(newData.val().toLowerCase()).val() === auth.uid && (!data.exists() || data.val().toLowerCase() === newData.val().toLowerCase() || !newData.parent().parent().parent().child('nicks').child(data.val().toLowerCase()).exists())"
+        },
+        "$other": { ".validate": false }
+      }
+    },
+
+    "nicks": {
+      "$k": {
+        ".read": true,
+        ".write": "auth != null && $k.matches(/^[a-z0-9_]+$/) && $k.length >= 3 && $k.length <= 20 && !$k.matches(/(admin|owner|moderator|support|milanazerbaijan)/) && ((!data.exists() && newData.val() === auth.uid) || (data.val() === auth.uid && (newData.exists() || newData.parent().parent().child('profiles').child(auth.uid).child('n').val().toLowerCase() !== $k)))",
+        ".validate": "newData.val() === auth.uid && newData.parent().parent().child('profiles').child(auth.uid).child('n').val().toLowerCase() === $k"
+      }
+    },
+
+    "bans": {
+      ".read": "auth != null && (root.child('roles').child(auth.uid).val() === 'admin' || root.child('roles').child(auth.uid).val() === 'owner')",
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        ".write": "auth != null && (root.child('roles').child(auth.uid).val() === 'admin' || root.child('roles').child(auth.uid).val() === 'owner') && !root.child('roles').child($uid).exists()",
+        ".validate": "newData.val() === true"
+      }
+    },
+
+    "last": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        ".write": "auth != null && auth.uid === $uid && newData.exists()",
+        ".validate": "newData.isNumber() && newData.val() === now && (!data.exists() || now - data.val() >= 30000)"
+      }
+    },
+
+    "hidden": {
+      ".read": "auth != null && (root.child('roles').child(auth.uid).val() === 'admin' || root.child('roles').child(auth.uid).val() === 'owner')",
+      "$item": {
+        "$cid": {
+          ".write": "auth != null && (root.child('roles').child(auth.uid).val() === 'admin' || root.child('roles').child(auth.uid).val() === 'owner')",
+          ".validate": "newData.hasChildren(['t'])",
+          "t": { ".validate": "newData.isString() && newData.val().length <= 280" },
+          "$other": { ".validate": false }
+        }
+      }
+    },
+
+    "comments": {
+      "$item": {
+        ".read": "$item.matches(/^[0-9-]+$/) && $item.length <= 20",
+        "$cid": {
+          ".write": "auth != null && $item.matches(/^[0-9-]+$/) && $item.length <= 20 && $cid.matches(/^[-_A-Za-z0-9]+$/) && $cid.length === 20 && ((!data.exists() && newData.exists() && newData.child('u').val() === auth.uid && !root.child('bans').child(auth.uid).exists() && root.child('profiles').child(auth.uid).child('n').exists()) || (data.exists() && data.child('u').val() === auth.uid) || (data.exists() && (root.child('roles').child(auth.uid).val() === 'owner' || (root.child('roles').child(auth.uid).val() === 'admin' && root.child('roles').child(data.child('u').val()).val() !== 'owner'))))",
+          ".validate": "newData.hasChildren(['u','p','ts']) && ((newData.hasChild('t') && !newData.hasChild('h') && !newData.hasChild('d')) || (!newData.hasChild('t') && newData.child('h').val() === true && !newData.hasChild('d')) || (!newData.hasChild('t') && newData.child('d').val() === true && !newData.hasChild('h'))) && (data.exists() || (newData.hasChild('t') && newData.parent().parent().parent().child('last').child(auth.uid).val() === now)) && (data.child('d').val() !== true || newData.child('d').val() === true) && (data.child('h').val() === newData.child('h').val() || newData.child('d').val() === true || root.child('roles').child(auth.uid).val() === 'admin' || root.child('roles').child(auth.uid).val() === 'owner')",
+          "u": { ".validate": "newData.isString() && ((data.exists() && newData.val() === data.val()) || (!data.exists() && newData.val() === auth.uid))" },
+          "p": { ".validate": "newData.isString() && ((data.exists() && newData.val() === data.val()) || (!data.exists() && (newData.val() === '' || (newData.val().matches(/^[-_A-Za-z0-9]+$/) && newData.val().length === 20 && newData.parent().parent().child(newData.val()).exists()))))" },
+          "ts": { ".validate": "newData.isNumber() && ((data.exists() && newData.val() === data.val()) || (!data.exists() && newData.val() === now))" },
+          "t": { ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 280 && ((data.exists() && newData.val() === data.val()) || (newData.parent().child('u').val() === auth.uid && !root.child('bans').child(auth.uid).exists()) || ((root.child('roles').child(auth.uid).val() === 'admin' || root.child('roles').child(auth.uid).val() === 'owner') && newData.val() === root.child('hidden').child($item).child($cid).child('t').val()))" },
+          "e": { ".validate": "newData.isNumber() && (newData.val() === now || newData.val() === data.val())" },
+          "h": { ".validate": "newData.val() === true" },
+          "d": { ".validate": "newData.val() === true" },
+          "$other": { ".validate": false }
+        }
+      }
+    }
+  }
+}
