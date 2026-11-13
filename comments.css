@@ -68,3 +68,55 @@ dialog.cmd::backdrop{background:rgba(0,0,0,.45)}
 @media (max-width:440px){.top .stats .ol{display:none}.top .stats{padding:6px 10px}.top .wrap{gap:8px}}
 @media (max-width:400px){.top .wrap{gap:6px}.top .brand{gap:7px}.top .brand b{font-size:15px}.top .mark{height:34px}.top .iconbtn,.top .acct{width:36px;height:36px}.top .stats{padding:6px 9px}}
 @media (max-width:350px){.top .stats{display:none}}
+
+/* ===== Təkliflər və İstəklər ===== */
+.sgpage h1{margin-top:6px}
+.btn.sm{height:34px;padding:0 13px;font-size:13.5px}
+.lnk.acc{color:var(--red-ink)}
+.sgf{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:12px}
+.sgf .cmas{margin:0}
+.sgwho{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 14px;font-size:13.5px;color:var(--ink-2)}
+.sgwho b{color:var(--ink)}
+.sgfields{display:flex;gap:12px;flex-wrap:wrap}
+.sgl{display:flex;flex-direction:column;gap:5px;font-size:12.5px;font-weight:600;color:var(--ink-3);min-width:0}
+.sgl.grow{flex:1 1 240px}
+.sgl input,.sgl select,.sgl textarea{font:inherit;font-size:15px;font-weight:400;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;outline:none;width:100%}
+.sgl input,.sgl select{height:42px;padding:0 12px}
+.sgl select{min-width:170px;cursor:pointer}
+.sgl textarea{padding:10px 12px;line-height:1.45;resize:vertical;min-height:96px}
+.sgl input:focus,.sgl select:focus,.sgl textarea:focus{border-color:var(--red)}
+.sgf .cmfb{margin-top:0}
+.msg.ok{color:#1f8f4e}
+.sgadm{margin-top:16px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:12px 14px;border-radius:12px;background:var(--tag-bg);color:var(--tag-ink);font-size:14px}
+.sgadm span{color:var(--ink-2)}
+.sgbar{padding-top:18px}
+.sgsep{flex:none;width:1px;background:var(--line);margin:4px 2px}
+.sg{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:12px}
+.sgtop{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.sgst{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:3px 8px;border-radius:6px;background:var(--chip);color:var(--ink-2)}
+.sgst.s-review{background:#fff1d6;color:#8a5a00}
+.sgst.s-accepted{background:#dcf3e5;color:#16673a}
+.sgst.s-rejected{background:var(--tag-bg);color:var(--tag-ink)}
+:root[data-theme="dark"] .sgst.s-review{background:#3a2e10;color:#ffcf6b}
+:root[data-theme="dark"] .sgst.s-accepted{background:#123824;color:#7fdca6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .sgst.s-review{background:#3a2e10;color:#ffcf6b}:root:not([data-theme="light"]) .sgst.s-accepted{background:#123824;color:#7fdca6}}
+.sg h3{margin:10px 0 6px;font-size:18px;line-height:1.3;letter-spacing:-.01em;overflow-wrap:anywhere}
+.sgt{margin:0 0 10px;color:var(--ink-2);font-size:15px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere}
+.sgau{color:var(--ink-2);font-weight:600}
+.sgr{margin-top:12px;padding:10px 12px;border-left:3px solid var(--red);background:var(--bg);border-radius:0 10px 10px 0;font-size:14px}
+.sgr b{display:block;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--red-ink);margin-bottom:3px}
+.sgr p{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--ink)}
+.sgact{display:flex;align-items:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+.vote{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-size:13.5px;font-weight:700;color:var(--ink-2)}
+.vote:hover{border-color:var(--ink-3)}
+.vote b{font-variant-numeric:tabular-nums;color:var(--ink)}
+.vote b:empty{display:none}
+.vote[aria-pressed="true"]{background:var(--tag-bg);border-color:var(--red);color:var(--tag-ink)}
+.vote[aria-pressed="true"] b{color:var(--tag-ink)}
+.vote:disabled{opacity:.6}
+.sgmod{margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);display:flex;flex-direction:column;gap:10px}
+.sgmod .sgl select{max-width:240px}
+.sgmod .sgl textarea{min-height:64px}
+.sgmod .cmfb{margin-top:0;justify-content:flex-end}
+@media (max-width:600px){nav.tabs a{font-size:13px}.sgl select{min-width:0}.sgfields .sgl:first-child{flex:1 1 100%}}
+@media (max-width:400px){nav.tabs{gap:3px}nav.tabs a{font-size:12.5px}}

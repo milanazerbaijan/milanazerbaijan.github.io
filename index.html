@@ -292,7 +292,7 @@ footer .wrap{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap}
   }
 
 
-  function tabs(on){return '<nav class="tabs" aria-label="Bölmələr"><a href="#/" class="'+(on==='x'?'on':'')+'">Xəbərlər</a><a href="#/cedvel" class="mob '+(on==='c'?'on':'')+'">Cədvəl</a><a href="#/haqqimizda" class="'+(on==='h'?'on':'')+'">Haqqımızda</a></nav>'}
+  function tabs(on){return '<nav class="tabs" aria-label="Bölmələr"><a href="#/" class="'+(on==='x'?'on':'')+'">Xəbərlər</a><a href="#/cedvel" class="mob '+(on==='c'?'on':'')+'">Cədvəl</a><a href="#/teklifler" class="'+(on==='t'?'on':'')+'">Təkliflər</a><a href="#/haqqimizda" class="'+(on==='h'?'on':'')+'">Haqqımızda</a></nav>'}
   var REACTS=[['like','👍','Bəyəndim'],['dislike','👎','Bəyənmədim'],['love','❤️','Sevdim'],['fire','🔥','Möhtəşəm'],['wow','😮','Təəccüblü'],['sad','😢','Kədərli']];
   function rxBar(id){return '<div class="rx" data-rx="'+esc(id)+'" role="group" aria-label="Reaksiyalar">'+REACTS.map(function(r){return '<button type="button" class="rb" data-r="'+r[0]+'" aria-pressed="false" title="'+r[2]+'" aria-label="'+r[2]+'"><span class="e" aria-hidden="true">'+r[1]+'</span><span class="n"></span></button>'}).join('')+'</div>'}
   function rendered(){try{document.dispatchEvent(new Event('ma:render'))}catch(e){}}
@@ -408,12 +408,19 @@ footer .wrap{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap}
     window.scrollTo(0,0);
   }
 
+  function renderSugg(){
+    document.title='Təkliflər və İstəklər — Milan Azərbaycan';
+    app.innerHTML=tabs('t')+'<section class="article sgpage" id="sg"><h1>Təkliflər və İstəklər</h1><div class="empty">Yüklənir…</div></section>';
+    window.scrollTo(0,0);rendered();
+  }
+
   var listScroll=0;
   function route(){
     var m=location.hash.match(/^#\/xeber\/(.+)$/);
     if(m){renderArticle(decodeURIComponent(m[1]))}
     else if(location.hash==='#/cedvel'){renderTables()}
     else if(location.hash==='#/haqqimizda'){renderAbout()}
+    else if(location.hash==='#/teklifler'){renderSugg()}
     else{renderList();window.scrollTo(0,listScroll)}
   }
   document.addEventListener('error',function(e){var im=e.target;if(!im||im.tagName!=='IMG')return;
@@ -508,5 +515,6 @@ var FIREBASE_CONFIG = {
 })();
 </script>
 <script src="comments.js"></script>
+<script src="suggestions.js"></script>
 </body>
 </html>

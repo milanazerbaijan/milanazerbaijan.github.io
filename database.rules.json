@@ -2,7 +2,6 @@
   "rules": {
     ".read": false,
     ".write": false,
-
     "presence": {
       ".read": true,
       "$id": {
@@ -10,7 +9,6 @@
         ".validate": "$id.matches(/^[a-z0-9]+$/) && $id.length <= 32 && newData.val() === true"
       }
     },
-
     "stats": {
       "days": {
         ".read": true,
@@ -20,7 +18,6 @@
         }
       }
     },
-
     "reactions": {
       "$item": {
         ".read": "$item.matches(/^[0-9-]+$/) && $item.length <= 20",
@@ -30,25 +27,24 @@
         }
       }
     },
-
     "roles": {
       "$uid": {
         ".read": true
       }
     },
-
     "profiles": {
       "$uid": {
         ".read": true,
-        ".write": "auth != null && auth.uid === $uid && newData.exists()",
+        ".write": "auth != null && auth.uid === $uid && newData.exists() && auth.token.firebase.sign_in_provider !== 'anonymous'",
         ".validate": "newData.hasChildren(['n'])",
         "n": {
           ".validate": "newData.isString() && newData.val().matches(/^[A-Za-z0-9_]+$/) && newData.val().length >= 3 && newData.val().length <= 20 && newData.parent().parent().parent().child('nicks').child(newData.val().toLowerCase()).val() === auth.uid && (!data.exists() || data.val().toLowerCase() === newData.val().toLowerCase() || !newData.parent().parent().parent().child('nicks').child(data.val().toLowerCase()).exists())"
         },
-        "$other": { ".validate": false }
+        "$other": {
+          ".validate": false
+        }
       }
     },
-
     "nicks": {
       "$k": {
         ".read": true,
@@ -56,7 +52,6 @@
         ".validate": "newData.val() === auth.uid && newData.parent().parent().child('profiles').child(auth.uid).child('n').val().toLowerCase() === $k"
       }
     },
-
     "bans": {
       ".read": "auth != null && (root.child('roles').child(auth.uid).val() === 'admin' || root.child('roles').child(auth.uid).val() === 'owner')",
       "$uid": {
@@ -65,7 +60,6 @@
         ".validate": "newData.val() === true"
       }
     },
-
     "last": {
       "$uid": {
         ".read": "auth != null && auth.uid === $uid",
@@ -73,34 +67,112 @@
         ".validate": "newData.isNumber() && newData.val() === now && (!data.exists() || now - data.val() >= 30000)"
       }
     },
-
     "hidden": {
       ".read": "auth != null && (root.child('roles').child(auth.uid).val() === 'admin' || root.child('roles').child(auth.uid).val() === 'owner')",
       "$item": {
         "$cid": {
           ".write": "auth != null && (root.child('roles').child(auth.uid).val() === 'admin' || root.child('roles').child(auth.uid).val() === 'owner')",
           ".validate": "newData.hasChildren(['t'])",
-          "t": { ".validate": "newData.isString() && newData.val().length <= 280" },
-          "$other": { ".validate": false }
+          "t": {
+            ".validate": "newData.isString() && newData.val().length <= 280"
+          },
+          "$other": {
+            ".validate": false
+          }
         }
       }
     },
-
     "comments": {
       "$item": {
         ".read": "$item.matches(/^[0-9-]+$/) && $item.length <= 20",
         "$cid": {
           ".write": "auth != null && $item.matches(/^[0-9-]+$/) && $item.length <= 20 && $cid.matches(/^[-_A-Za-z0-9]+$/) && $cid.length === 20 && ((!data.exists() && newData.exists() && newData.child('u').val() === auth.uid && !root.child('bans').child(auth.uid).exists() && root.child('profiles').child(auth.uid).child('n').exists()) || (data.exists() && data.child('u').val() === auth.uid) || (data.exists() && (root.child('roles').child(auth.uid).val() === 'owner' || (root.child('roles').child(auth.uid).val() === 'admin' && root.child('roles').child(data.child('u').val()).val() !== 'owner'))))",
           ".validate": "newData.hasChildren(['u','p','ts']) && ((newData.hasChild('t') && !newData.hasChild('h') && !newData.hasChild('d')) || (!newData.hasChild('t') && newData.child('h').val() === true && !newData.hasChild('d')) || (!newData.hasChild('t') && newData.child('d').val() === true && !newData.hasChild('h'))) && (data.exists() || (newData.hasChild('t') && newData.parent().parent().parent().child('last').child(auth.uid).val() === now)) && (data.child('d').val() !== true || newData.child('d').val() === true) && (data.child('h').val() === newData.child('h').val() || newData.child('d').val() === true || root.child('roles').child(auth.uid).val() === 'admin' || root.child('roles').child(auth.uid).val() === 'owner')",
-          "u": { ".validate": "newData.isString() && ((data.exists() && newData.val() === data.val()) || (!data.exists() && newData.val() === auth.uid))" },
-          "p": { ".validate": "newData.isString() && ((data.exists() && newData.val() === data.val()) || (!data.exists() && (newData.val() === '' || (newData.val().matches(/^[-_A-Za-z0-9]+$/) && newData.val().length === 20 && newData.parent().parent().child(newData.val()).exists()))))" },
-          "ts": { ".validate": "newData.isNumber() && ((data.exists() && newData.val() === data.val()) || (!data.exists() && newData.val() === now))" },
-          "t": { ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 280 && ((data.exists() && newData.val() === data.val()) || (newData.parent().child('u').val() === auth.uid && !root.child('bans').child(auth.uid).exists()) || ((root.child('roles').child(auth.uid).val() === 'admin' || root.child('roles').child(auth.uid).val() === 'owner') && newData.val() === root.child('hidden').child($item).child($cid).child('t').val()))" },
-          "e": { ".validate": "newData.isNumber() && (newData.val() === now || newData.val() === data.val())" },
-          "h": { ".validate": "newData.val() === true" },
-          "d": { ".validate": "newData.val() === true" },
-          "$other": { ".validate": false }
+          "u": {
+            ".validate": "newData.isString() && ((data.exists() && newData.val() === data.val()) || (!data.exists() && newData.val() === auth.uid))"
+          },
+          "p": {
+            ".validate": "newData.isString() && ((data.exists() && newData.val() === data.val()) || (!data.exists() && (newData.val() === '' || (newData.val().matches(/^[-_A-Za-z0-9]+$/) && newData.val().length === 20 && newData.parent().parent().child(newData.val()).exists()))))"
+          },
+          "ts": {
+            ".validate": "newData.isNumber() && ((data.exists() && newData.val() === data.val()) || (!data.exists() && newData.val() === now))"
+          },
+          "t": {
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 280 && ((data.exists() && newData.val() === data.val()) || (newData.parent().child('u').val() === auth.uid && !root.child('bans').child(auth.uid).exists()) || ((root.child('roles').child(auth.uid).val() === 'admin' || root.child('roles').child(auth.uid).val() === 'owner') && newData.val() === root.child('hidden').child($item).child($cid).child('t').val()))"
+          },
+          "e": {
+            ".validate": "newData.isNumber() && (newData.val() === now || newData.val() === data.val())"
+          },
+          "h": {
+            ".validate": "newData.val() === true"
+          },
+          "d": {
+            ".validate": "newData.val() === true"
+          },
+          "$other": {
+            ".validate": false
+          }
         }
+      }
+    },
+    "sugg": {
+      ".read": true,
+      ".indexOn": [
+        "ts"
+      ],
+      "$sid": {
+        ".write": "auth != null && $sid.matches(/^[-_A-Za-z0-9]+$/) && $sid.length === 20 && ((!data.exists() && newData.exists() && newData.child('u').val() === auth.uid && !root.child('bans').child(auth.uid).exists()) || (data.exists() && auth != null && (root.child('roles').child(auth.uid).val() === 'admin' || root.child('roles').child(auth.uid).val() === 'owner')) || (data.exists() && !newData.exists() && data.child('u').val() === auth.uid))",
+        ".validate": "newData.hasChildren(['u','k','ti','t','ts','st']) && (data.exists() || (newData.child('st').val() === 'new' && !newData.hasChild('r') && newData.parent().parent().child('lastS').child(auth.uid).val() === now && (auth.token.firebase.sign_in_provider !== 'anonymous' || newData.parent().parent().child('meta').child('lastAnonS').val() === now)))",
+        "u": {
+          ".validate": "newData.isString() && ((data.exists() && newData.val() === data.val()) || (!data.exists() && newData.val() === auth.uid))"
+        },
+        "k": {
+          ".validate": "(data.exists() && newData.val() === data.val()) || (!data.exists() && (newData.val() === 'teklif' || newData.val() === 'istek' || newData.val() === 'xeta' || newData.val() === 'diger'))"
+        },
+        "ti": {
+          ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 80 && (!data.exists() || newData.val() === data.val())"
+        },
+        "t": {
+          ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 1000 && (!data.exists() || newData.val() === data.val())"
+        },
+        "ts": {
+          ".validate": "newData.isNumber() && ((data.exists() && newData.val() === data.val()) || (!data.exists() && newData.val() === now))"
+        },
+        "st": {
+          ".validate": "newData.val() === 'new' || newData.val() === 'review' || newData.val() === 'accepted' || newData.val() === 'rejected'"
+        },
+        "r": {
+          ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 500"
+        },
+        "rt": {
+          ".validate": "newData.isNumber() && (newData.val() === now || newData.val() === data.val())"
+        },
+        "$other": {
+          ".validate": false
+        }
+      }
+    },
+    "votes": {
+      ".read": true,
+      "$sid": {
+        ".write": "auth != null && (root.child('roles').child(auth.uid).val() === 'admin' || root.child('roles').child(auth.uid).val() === 'owner') && !newData.exists()",
+        "$uid": {
+          ".write": "auth != null && auth.uid === $uid && !root.child('bans').child(auth.uid).exists() && (!newData.exists() || root.child('sugg').child($sid).exists())",
+          ".validate": "newData.val() === true"
+        }
+      }
+    },
+    "lastS": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        ".write": "auth != null && auth.uid === $uid && newData.exists()",
+        ".validate": "newData.isNumber() && newData.val() === now && (!data.exists() || now - data.val() >= 300000)"
+      }
+    },
+    "meta": {
+      "lastAnonS": {
+        ".write": "auth != null && auth.token.firebase.sign_in_provider === 'anonymous' && newData.exists()",
+        ".validate": "newData.isNumber() && newData.val() === now && (!data.exists() || now - data.val() >= 60000)"
       }
     }
   }

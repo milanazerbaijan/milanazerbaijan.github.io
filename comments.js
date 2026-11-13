@@ -53,9 +53,15 @@
     var p=new firebase.auth.GoogleAuthProvider();
     p.setCustomParameters({prompt:'select_account'});
     askNick=true;
-    auth.signInWithPopup(p).catch(function(e){
+    var cu=auth.currentUser, anon=cu&&cu.isAnonymous;
+    /* anonim istifadəçi Google ilə daxil olanda göndərdiyi təkliflər ona qalsın deyə hesab birləşdirilir */
+    (anon?cu.linkWithPopup(p):auth.signInWithPopup(p)).catch(function(e){
       var c=(e&&e.code)||'';
-      if(c==='auth/popup-blocked'||c==='auth/operation-not-supported-in-environment'){auth.signInWithRedirect(p);return}
+      if(anon&&(c==='auth/credential-already-in-use'||c==='auth/email-already-in-use')&&e.credential){return auth.signInWithCredential(e.credential)}
+      throw e;
+    }).then(function(r){if(anon&&r&&r.user)onUser(r.user)}).catch(function(e){
+      var c=(e&&e.code)||'';
+      if(c==='auth/popup-blocked'||c==='auth/operation-not-supported-in-environment'){anon?cu.linkWithRedirect(p):auth.signInWithRedirect(p);return}
       askNick=false;
       if(c==='auth/popup-closed-by-user'||c==='auth/cancelled-popup-request')return;
       alert('Daxil olmaq alınmadı'+(c==='auth/unauthorized-domain'?' (bu domenə icazə verilməyib)':'')+'. Bir az sonra yenidən cəhd edin.');
@@ -66,9 +72,11 @@
   function detachUser(){userRefs.forEach(function(r){r.off()});userRefs=[];if(bansRef){bansRef.off();bansRef=null;bans={}}}
   function listen(path,fn){var r=db.ref(path);r.on('value',fn,function(){});userRefs.push(r)}
 
-  auth.onAuthStateChanged(function(u){
+  function fire(){try{document.dispatchEvent(new Event('ma:auth'))}catch(e){}}
+  auth.onAuthStateChanged(onUser);
+  function onUser(u){
     detachUser();
-    me=u||null; myNick=undefined; myRole=null; banned=false; lastAt=0;
+    me=u&&!u.isAnonymous?u:null; myNick=undefined; myRole=null; banned=false; lastAt=0;
     if(me){
       var uid=me.uid;
       listen('profiles/'+uid+'/n',function(s){
@@ -84,7 +92,7 @@
       listen('last/'+uid,function(s){lastAt=+s.val()||0});
     }
     paintAll();
-  });
+  }
 
   function paintAcct(){
     if(!acct)return;
@@ -146,8 +154,8 @@
   /* ---------- şərhlər bölməsi ---------- */
   function watchUser(uid){
     if(!uid||watchedU[uid])return;watchedU[uid]=1;
-    db.ref('profiles/'+uid+'/n').on('value',function(s){nicks[uid]=s.val()||null;schedule()},function(){nicks[uid]=null});
-    db.ref('roles/'+uid).on('value',function(s){roles[uid]=s.val()||null;schedule()},function(){});
+    db.ref('profiles/'+uid+'/n').on('value',function(s){nicks[uid]=s.val()||null;schedule();fireU()},function(){nicks[uid]=null});
+    db.ref('roles/'+uid).on('value',function(s){roles[uid]=s.val()||null;schedule();fireU()},function(){});
   }
   function watchHidden(){
     if(cur&&cur.hidRef){cur.hidRef.off();cur.hidRef=null}
@@ -181,7 +189,7 @@
   document.addEventListener('ma:render',mount);
   window.addEventListener('hashchange',function(){setTimeout(mount,0)});
 
-  function paintAll(){paintAcct();paintCompose();paintList()}
+  function paintAll(){paintAcct();paintCompose();paintList();fire()}
 
   function formHTML(kind,id,val){
     var ph=kind==='main'?'Fikrinizi yazın…':(kind==='reply'?'Cavabınızı yazın…':'');
@@ -365,6 +373,21 @@
       msg.textContent=banned?'Hesabınız məhdudlaşdırılıb.':'Göndərmək alınmadı. 30 saniyə gözləyib yenidən cəhd edin.';
     });
   });
+
+  var uT=null;
+  function fireU(){if(uT)return;uT=setTimeout(function(){uT=null;try{document.dispatchEvent(new Event('ma:users'))}catch(e){}},40)}
+  function anonName(uid){var h=0;for(var i=0;i<uid.length;i++)h=(h*31+uid.charCodeAt(i))>>>0;return 'Anonim #'+(1000+h%9000)}
+
+  /* digər bölmələr (Təkliflər) üçün ortaq funksiyalar */
+  window.MA={
+    auth:auth, db:db, TS:TS, esc:esc, ago:ago, fullTime:fullTime, now:now, clean:clean, ICON_G:ICON_G,
+    signIn:signIn, openNick:openNick, watchUser:watchUser, anonName:anonName,
+    state:function(){return {me:me,nick:myNick,role:myRole,banned:banned,mod:isMod()}},
+    nameOf:function(uid){var n=nicks[uid];return n?n:(n===null?anonName(uid):'…')},
+    roleOf:function(uid){return roles[uid]||null},
+    canMod:function(uid){return myRole==='owner'||(myRole==='admin'&&roles[uid]!=='owner')}
+  };
+  try{document.dispatchEvent(new Event('ma:ready'))}catch(e){}
 
   paintAcct();
   mount();
