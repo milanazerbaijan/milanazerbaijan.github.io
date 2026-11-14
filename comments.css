@@ -275,3 +275,32 @@ nav.tabs .tabmenu a.on{background:var(--tag-bg);color:var(--tag-ink)}
 .pdm.mini .pdmy{font-size:12.5px;color:#16673a;font-weight:700;white-space:nowrap}
 .pdm.mini .btn{flex:none}
 .pdm.mini .pdadm{flex-basis:100%;margin:0}
+
+/* ===== Söyüş xəbərdarlığı, şikayət, idarə paneli ===== */
+.msg.warn{display:block;flex-basis:100%;order:-1;padding:10px 12px;border-radius:10px;background:#fff1d6;color:#7a4f00;font-weight:600;font-size:13.5px;line-height:1.45}
+:root[data-theme="dark"] .msg.warn{background:#3a2e10;color:#ffcf6b}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .msg.warn{background:#3a2e10;color:#ffcf6b}}
+.cmrep{font-size:12.5px;color:var(--ink-3);padding:4px 0}
+.reps{display:flex;flex-direction:column;gap:8px}
+.reps .btn{justify-content:center;height:42px}
+.acct{position:relative}
+.abadge{position:absolute;top:-6px;right:-6px;min-width:19px;height:19px;padding:0 5px;border-radius:999px;background:var(--red);color:#fff;font-size:11px;font-weight:800;font-style:normal;line-height:19px;text-align:center;box-shadow:0 0 0 2px var(--bg)}
+.cmd p a.btn{text-decoration:none}
+.adm h1{margin-bottom:16px}
+.admsum{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:6px}
+.admbox{display:block;text-decoration:none;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px}
+.admbox b{display:block;font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.admbox span{font-size:12.5px;color:var(--ink-3)}
+a.admbox:hover{border-color:var(--ink-3)}
+.admc{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:12px}
+.admh{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;font-size:12.5px}
+.admw{color:var(--ink-2);font-weight:600}
+.admt{margin-left:auto;color:var(--ink-3)}
+.admn{display:block;margin:8px 0 6px;font-size:13px;color:var(--red-ink);font-weight:600;text-decoration:none;overflow-wrap:anywhere}
+.admq{padding:10px 12px;border-radius:10px;background:var(--bg);margin-bottom:6px}
+.admq b{font-size:14px}
+.admq p{margin:4px 0 0;font-size:15px;white-space:pre-wrap;overflow-wrap:anywhere}
+.admban{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--line)}
+.admban:last-child{border-bottom:0}
+.admnote{font-size:12.5px;color:var(--ink-3);margin-top:20px}
+@media (max-width:480px){.admsum{grid-template-columns:1fr 1fr 1fr;gap:6px}.admbox{padding:10px}.admbox b{font-size:21px}.admbox span{font-size:11px}}

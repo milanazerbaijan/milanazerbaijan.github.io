@@ -15,6 +15,23 @@
   var TS=firebase.database.ServerValue.TIMESTAMP;
   var MAX=280, GAP=30000, INDENT=4, SHOW=2, PAGE=20;
   var NICK_RE=/^[A-Za-z0-9_]{3,20}$/, RESERVED=/(admin|owner|moderator|support|milanazerbaijan)/i;
+  /* ---------- söyüş filtri ----------
+     Eyni siyahı database.rules.json-da da var (orada da yoxlanılır, keçmək olmur).
+     Burada əlavə olaraq gizlədilmiş yazılış da tutulur: s.i.k, s i k, 4mk, siiiik və s. */
+  var BAD_RE=new RegExp("([^a-zəşçğıöü]sik[^akil]|[^a-zəşçğıöü]sika[^y]|[^a-zəşçğıöü]sikk[^eə]|[^a-zəşçğıöü]siki[^ncl]|[^a-zəşçğıöü]amc[ıi]|[^a-zəşçğıöü]amına|[^a-zəşçğıöü]amını|[^a-zəşçğıöü]am[ıi]na ?[kq]o[iy]|[^a-zəşçğıöü]am[kq][^a-zəşçğıöü]|[^a-zəşçğıöü]or[ou]s[pb]u|[^a-zəşçğıöü][kqg][aəe]h[pb][eə]|[^a-zəşçğıöü]yarr?ak|[^a-zəşçğıöü]göt[^a-zəşçğıöü]|[^a-zəşçğıöü]götü[^a-zəşçğıöü]|[^a-zəşçğıöü]götün|[^a-zəşçğıöü]g[öo]tver|[^a-zəşçğıöü]piç|[^a-zəşçğıöü]ibne|[^a-zəşçğıöü]puşt|[^a-zəşçğıöü]pezeven|[^a-zəşçğıöü][gq]avat|[^a-zəşçğıöü]yav[şs]ak|[^a-zəşçğıöü][kq]alta[kq]|[^a-zəşçğıöü]s[üu]rt[üu]k|[^a-zəşçğıöü][kq]anc[ıi][kq]|[^a-zəşçğıöü][dt]a[şs]+a[kq]|[^a-zəşçğıöü]d[ao]lba[yj]|[^a-zəşçğıöü]gi[cj]d[ıi]l|[^a-zəşçğıöü][şs][eə]r[eə]fsiz|[^a-zəşçğıöü]oç[^a-zəşçğıöü]|[^a-zəşçğıöü]bl[yj]a[td]|[^a-zəşçğıöü]suka[^a-zəşçğıöü]|[^a-zəşçğıöü]pizd|[^a-zəşçğıöü]nahuy|[^a-zəşçğıöü]yebat|[^a-zəşçğıöü]pid[oa]r|[^a-zəşçğıöü]pidr|[^a-zəşçğıöü]shit[^a-zəşçğıöü]|[^a-zəşçğıöü]bitch|[^a-zəşçğıöü]asshole|[^a-zəşçğıöü]it ?o[ğg]lu[^a-zəşçğıöü]|[^a-zəşçğıöü]köp[eə]k ?o[ğg]lu[^a-zəşçğıöü]|fuck)");
+  var LEET={'0':'o','1':'i','!':'i','3':'e','4':'a','@':'a','$':'s','5':'s','7':'t'};
+  function lowerAz(t){return String(t||'').replace(/İ/g,'i').toLowerCase().replace(/\u0307/g,'')}
+  function isBad(t){
+    var a=lowerAz(t);
+    if(BAD_RE.test(' '+a+' '))return true;
+    var L='a-zəşçğıöü';
+    var b=a.replace(/[0134579@$!]/g,function(c){return LEET[c]||c})
+      .replace(new RegExp('(['+L+'])[.\\-_*+~\'"`|\\\\/,]+(?=['+L+'])','g'),'$1')
+      .replace(new RegExp('(^|[^'+L+'])((?:['+L+'][ ]+){2,}['+L+'])(?=[^'+L+']|$)','g'),function(m,p,q){return p+q.replace(/ +/g,'')})
+      .replace(new RegExp('(['+L+'])\\1{2,}','g'),'$1');
+    return BAD_RE.test(' '+b+' ');
+  }
+  var BAD_MSG='Mətndə nalayiq ifadə var. Zəhmət olmasa hörmətli dil istifadə edin — bu sayt bütün azarkeşlər üçündür.';
   var MONTHS=['yanvar','fevral','mart','aprel','may','iyun','iyul','avqust','sentyabr','oktyabr','noyabr','dekabr'];
   var ICON_USER='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>';
   var ICON_G='<svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>';
@@ -69,7 +86,8 @@
   }
   auth.getRedirectResult().then(function(r){if(r&&r.user)askNick=true}).catch(function(){});
 
-  function detachUser(){userRefs.forEach(function(r){r.off()});userRefs=[];if(bansRef){bansRef.off();bansRef=null;bans={}}}
+  var myRep={}, repRef=null, repCount=0;
+  function detachUser(){userRefs.forEach(function(r){r.off()});userRefs=[];if(bansRef){bansRef.off();bansRef=null;bans={}}if(repRef){repRef.off();repRef=null;repCount=0}myRep={}}
   function listen(path,fn){var r=db.ref(path);r.on('value',fn,function(){});userRefs.push(r)}
 
   function fire(){try{document.dispatchEvent(new Event('ma:auth'))}catch(e){}}
@@ -86,10 +104,12 @@
       listen('roles/'+uid,function(s){
         myRole=s.val()||null; roles[uid]=myRole;
         if(isMod()&&!bansRef){bansRef=db.ref('bans');bansRef.on('value',function(b){bans=b.val()||{};paintList()},function(){})}
+        if(isMod()&&!repRef){repRef=db.ref('reports');repRef.on('value',function(x){var n=0;x.forEach(function(i){i.forEach(function(){n++})});repCount=n;paintAcct();fire()},function(){})}
         watchHidden(); paintAll();
       });
       listen('bans/'+uid,function(s){banned=s.val()===true;paintCompose();paintList()});
       listen('last/'+uid,function(s){lastAt=+s.val()||0});
+      listen('myrep/'+uid,function(s){myRep=s.val()||{};paintList()});
     }
     paintAll();
   }
@@ -98,7 +118,7 @@
     if(!acct)return;
     acct.hidden=false;
     if(!me){acct.innerHTML=ICON_USER+'<span>Daxil ol</span>';acct.setAttribute('aria-label','Daxil ol');acct.title='Google ilə daxil ol'}
-    else{var n=myNick||'Hesab';acct.innerHTML=ICON_USER+'<span>'+esc(n)+'</span>';acct.setAttribute('aria-label','Hesab: '+n);acct.title='Hesab'}
+    else{var n=myNick||'Hesab', rc=isMod()&&repCount;acct.innerHTML=ICON_USER+'<span>'+esc(n)+'</span>'+(rc?'<i class="abadge">'+rc+'</i>':'');acct.setAttribute('aria-label','Hesab: '+n+(rc?', '+rc+' şikayət':''));acct.title=rc?rc+' yeni şikayət':'Hesab'}
   }
   if(acct)acct.onclick=function(){me?openAccount():signIn()};
 
@@ -127,7 +147,7 @@
       e.preventDefault();
       var n=inp.value.trim(), k=n.toLowerCase(), uid=me.uid, old=myNick?myNick.toLowerCase():null;
       if(!NICK_RE.test(n)){err.textContent='Təxəllüs 3–20 simvol olmalıdır: yalnız latın hərfləri, rəqəmlər və _.';return}
-      if(RESERVED.test(n)){err.textContent='Bu təxəllüsdən istifadə etmək olmaz.';return}
+      if(RESERVED.test(n)||isBad(n)){err.textContent='Bu təxəllüsdən istifadə etmək olmaz.';return}
       if(n===myNick){closeDlg();return}
       btn.disabled=true;err.textContent='';
       db.ref('nicks/'+k).once('value').then(function(s){
@@ -145,10 +165,25 @@
     var role=myRole==='owner'?'Sahib':(myRole==='admin'?'Admin':'İstifadəçi');
     var d=dialog('<div class="dlg"><h3>Hesab</h3>'+
       '<p>Təxəllüs: <b>'+esc(myNick||'seçilməyib')+'</b><br>Rol: <b>'+role+'</b>'+(banned?'<br><span class="errc">Hesabınız şərh yazmaqdan məhdudlaşdırılıb.</span>':'')+'</p>'+
+      (isMod()?'<p><a class="btn sm" href="#/idare" data-x="adm">İdarə paneli'+(repCount?' · '+repCount+' şikayət':'')+'</a></p>':'')+
       '<div class="row"><button type="button" class="lnk" data-x="out">Çıxış</button><button type="button" class="lnk" data-x="nick">'+(myNick?'Təxəllüsü dəyiş':'Təxəllüs seç')+'</button><button type="button" class="btn" data-x="close">Bağla</button></div></div>');
     d.querySelector('[data-x="close"]').onclick=closeDlg;
     d.querySelector('[data-x="nick"]').onclick=openNick;
     d.querySelector('[data-x="out"]').onclick=function(){closeDlg();auth.signOut()};
+    var ad=d.querySelector('[data-x="adm"]');if(ad)ad.onclick=function(){closeDlg()};
+  }
+
+  function openReport(c,item){
+    var d=dialog('<div class="dlg"><h3>Şikayət et</h3><p>Bu şərhdə nə problem var? Şikayətiniz yalnız adminlərə görünəcək.</p>'+
+      '<div class="reps"><button type="button" class="btn ghost" data-r="insult">Təhqir / söyüş</button><button type="button" class="btn ghost" data-r="spam">Spam / reklam</button><button type="button" class="btn ghost" data-r="other">Digər</button></div>'+
+      '<p class="err" role="alert"></p><div class="row"><button type="button" class="lnk" data-x="close">Ləğv et</button></div></div>');
+    d.querySelector('[data-x="close"]').onclick=closeDlg;
+    Array.prototype.forEach.call(d.querySelectorAll('[data-r]'),function(b){b.onclick=function(){
+      var u={};u['reports/'+item+'/'+c.id+'/'+me.uid]={r:b.getAttribute('data-r'),ts:TS};u['myrep/'+me.uid+'/'+item+'/'+c.id]=true;
+      Array.prototype.forEach.call(d.querySelectorAll('button'),function(x){x.disabled=true});
+      db.ref().update(u).then(function(){d.querySelector('.dlg').innerHTML='<h3>Təşəkkür edirik</h3><p>Şikayətiniz adminlərə göndərildi.</p><div class="row"><button type="button" class="btn" data-x="close">Bağla</button></div>';d.querySelector('[data-x="close"]').onclick=closeDlg})
+        .catch(function(){d.querySelector('.err').textContent='Göndərmək alınmadı.';Array.prototype.forEach.call(d.querySelectorAll('button'),function(x){x.disabled=false})});
+    }});
   }
 
   /* ---------- şərhlər bölməsi ---------- */
@@ -283,6 +318,10 @@
     if(!c.h&&editing!==c.id)a.push('<button type="button" class="lnk" data-act="reply">Cavab ver</button>');
     if(mine&&!c.h&&editing!==c.id&&!banned)a.push('<button type="button" class="lnk" data-act="edit">Redaktə et</button>');
     if(mine)a.push('<button type="button" class="lnk dng" data-act="del">Sil</button>');
+    if(me&&!mine&&!isMod()&&!c.h){
+      if(myRep[cur.item]&&myRep[cur.item][c.id])a.push('<span class="cmrep">Şikayət edildi ✓</span>');
+      else a.push('<button type="button" class="lnk" data-act="report">Şikayət et</button>');
+    }
     if(!mine&&isMod()&&canMod(c)){
       a.push('<button type="button" class="lnk" data-act="'+(c.h?'unhide':'hide')+'">'+(c.h?'Göstər':'Gizlət')+'</button>');
       a.push('<button type="button" class="lnk dng" data-act="del">Sil</button>');
@@ -368,6 +407,7 @@
         return db.ref().update(x);
       }).catch(fail);return;
     }
+    if(act==='report'){if(me)openReport(c,cur.item);return}
     if(act==='ban'){
       if(!confirm('"'+nickOf(c.u)+'" istifadəçisi bloklansın? O, artıq şərh yaza bilməyəcək.'))return;
       db.ref('bans/'+c.u).set(true).catch(fail);return;
@@ -383,6 +423,8 @@
     if(!me){signIn();return}
     if(!myNick){openNick();return}
     if(!text){msg.textContent='Mətn boşdur.';return}
+    if(isBad(text)){msg.textContent=BAD_MSG;msg.classList.add('warn');return}
+    msg.classList.remove('warn');
     if(text.length>MAX){msg.textContent='Ən çox '+MAX+' simvol yazmaq olar.';return}
     if(kind==='edit'){
       btn.disabled=true;
@@ -418,7 +460,8 @@
     state:function(){return {me:me,nick:myNick,role:myRole,banned:banned,mod:isMod()}},
     nameOf:function(uid){var n=nicks[uid];return n?n:(n===null?anonName(uid):'…')},
     roleOf:function(uid){return roles[uid]||null},
-    canMod:function(uid){return myRole==='owner'||(myRole==='admin'&&roles[uid]!=='owner')}
+    canMod:function(uid){return myRole==='owner'||(myRole==='admin'&&roles[uid]!=='owner')},
+    isBad:isBad, BAD_MSG:BAD_MSG
   };
   try{document.dispatchEvent(new Event('ma:ready'))}catch(e){}
 

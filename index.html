@@ -26,7 +26,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="comments.css?v=202611141337">
+<link rel="stylesheet" href="comments.css?v=202611141424">
 <script>
   (function(){var t=null;try{t=localStorage.getItem('ma-theme')}catch(e){}
   if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);})();
@@ -451,6 +451,11 @@ footer .wrap{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap}
     window.scrollTo(0,0);rendered();
   }
 
+  function renderAdmin(){
+    document.title='İdarə paneli — Milan Azərbaycan';
+    app.innerHTML=tabs('')+'<section class="article adm" id="adm"><h1>İdarə paneli</h1><div class="empty">Yüklənir…</div></section>';
+    window.scrollTo(0,0);rendered();
+  }
   function renderPred(){
     document.title='Proqnoz oyunu — Milan Azərbaycan';
     app.innerHTML=tabs('p')+'<section class="pd" id="pd"><h1>Proqnoz oyunu</h1><div class="empty">Yüklənir…</div></section>';
@@ -465,6 +470,7 @@ footer .wrap{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap}
     else if(location.hash==='#/haqqimizda'){renderAbout()}
     else if(location.hash==='#/teklifler'){renderSugg()}
     else if(location.hash==='#/proqnoz'){renderPred()}
+    else if(location.hash==='#/idare'){renderAdmin()}
     else{renderList();window.scrollTo(0,listScroll)}
   }
   document.addEventListener('error',function(e){var im=e.target;if(!im||im.tagName!=='IMG')return;
@@ -558,9 +564,10 @@ var FIREBASE_CONFIG = {
   }catch(e){}
 })();
 </script>
-<script src="comments.js?v=202611141337"></script>
-<script src="suggestions.js?v=202611141337"></script>
-<script src="share.js?v=202611141337"></script>
-<script src="predictions.js?v=202611141337"></script>
+<script src="comments.js?v=202611141424"></script>
+<script src="suggestions.js?v=202611141424"></script>
+<script src="share.js?v=202611141424"></script>
+<script src="predictions.js?v=202611141424"></script>
+<script src="moderation.js?v=202611141424"></script>
 </body>
 </html>

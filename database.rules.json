@@ -38,7 +38,7 @@
         ".write": "auth != null && auth.uid === $uid && newData.exists() && auth.token.firebase.sign_in_provider !== 'anonymous'",
         ".validate": "newData.hasChildren(['n'])",
         "n": {
-          ".validate": "newData.isString() && newData.val().matches(/^[A-Za-z0-9_]+$/) && newData.val().length >= 3 && newData.val().length <= 20 && newData.parent().parent().parent().child('nicks').child(newData.val().toLowerCase()).val() === auth.uid && (!data.exists() || data.val().toLowerCase() === newData.val().toLowerCase() || !newData.parent().parent().parent().child('nicks').child(data.val().toLowerCase()).exists())"
+          ".validate": "newData.isString() && newData.val().matches(/^[A-Za-z0-9_]+$/) && newData.val().length >= 3 && newData.val().length <= 20 && newData.parent().parent().parent().child('nicks').child(newData.val().toLowerCase()).val() === auth.uid && (!data.exists() || data.val().toLowerCase() === newData.val().toLowerCase() || !newData.parent().parent().parent().child('nicks').child(data.val().toLowerCase()).exists()) && !(' ' + newData.val().toLowerCase().replace('̇', '') + ' ').matches(/([^a-zəşçğıöü]sik[^akil]|[^a-zəşçğıöü]sika[^y]|[^a-zəşçğıöü]sikk[^eə]|[^a-zəşçğıöü]siki[^ncl]|[^a-zəşçğıöü]amc[ıi]|[^a-zəşçğıöü]amına|[^a-zəşçğıöü]amını|[^a-zəşçğıöü]am[ıi]na ?[kq]o[iy]|[^a-zəşçğıöü]am[kq][^a-zəşçğıöü]|[^a-zəşçğıöü]or[ou]s[pb]u|[^a-zəşçğıöü][kqg][aəe]h[pb][eə]|[^a-zəşçğıöü]yarr?ak|[^a-zəşçğıöü]göt[^a-zəşçğıöü]|[^a-zəşçğıöü]götü[^a-zəşçğıöü]|[^a-zəşçğıöü]götün|[^a-zəşçğıöü]g[öo]tver|[^a-zəşçğıöü]piç|[^a-zəşçğıöü]ibne|[^a-zəşçğıöü]puşt|[^a-zəşçğıöü]pezeven|[^a-zəşçğıöü][gq]avat|[^a-zəşçğıöü]yav[şs]ak|[^a-zəşçğıöü][kq]alta[kq]|[^a-zəşçğıöü]s[üu]rt[üu]k|[^a-zəşçğıöü][kq]anc[ıi][kq]|[^a-zəşçğıöü][dt]a[şs]+a[kq]|[^a-zəşçğıöü]d[ao]lba[yj]|[^a-zəşçğıöü]gi[cj]d[ıi]l|[^a-zəşçğıöü][şs][eə]r[eə]fsiz|[^a-zəşçğıöü]oç[^a-zəşçğıöü]|[^a-zəşçğıöü]bl[yj]a[td]|[^a-zəşçğıöü]suka[^a-zəşçğıöü]|[^a-zəşçğıöü]pizd|[^a-zəşçğıöü]nahuy|[^a-zəşçğıöü]yebat|[^a-zəşçğıöü]pid[oa]r|[^a-zəşçğıöü]pidr|[^a-zəşçğıöü]shit[^a-zəşçğıöü]|[^a-zəşçğıöü]bitch|[^a-zəşçğıöü]asshole|[^a-zəşçğıöü]it ?o[ğg]lu[^a-zəşçğıöü]|[^a-zəşçğıöü]köp[eə]k ?o[ğg]lu[^a-zəşçğıöü]|fuck)/)"
         },
         "$other": {
           ".validate": false
@@ -98,7 +98,7 @@
             ".validate": "newData.isNumber() && ((data.exists() && newData.val() === data.val()) || (!data.exists() && newData.val() === now))"
           },
           "t": {
-            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 280 && ((data.exists() && newData.val() === data.val()) || (newData.parent().child('u').val() === auth.uid && !root.child('bans').child(auth.uid).exists()) || ((root.child('roles').child(auth.uid).val() === 'admin' || root.child('roles').child(auth.uid).val() === 'owner') && newData.val() === root.child('hidden').child($item).child($cid).child('t').val()))"
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 280 && ((data.exists() && newData.val() === data.val()) || (newData.parent().child('u').val() === auth.uid && !root.child('bans').child(auth.uid).exists()) || ((root.child('roles').child(auth.uid).val() === 'admin' || root.child('roles').child(auth.uid).val() === 'owner') && newData.val() === root.child('hidden').child($item).child($cid).child('t').val())) && ((data.exists() && newData.val() === data.val()) || newData.parent().child('u').val() !== auth.uid || !(' ' + newData.val().toLowerCase().replace('̇', '') + ' ').matches(/([^a-zəşçğıöü]sik[^akil]|[^a-zəşçğıöü]sika[^y]|[^a-zəşçğıöü]sikk[^eə]|[^a-zəşçğıöü]siki[^ncl]|[^a-zəşçğıöü]amc[ıi]|[^a-zəşçğıöü]amına|[^a-zəşçğıöü]amını|[^a-zəşçğıöü]am[ıi]na ?[kq]o[iy]|[^a-zəşçğıöü]am[kq][^a-zəşçğıöü]|[^a-zəşçğıöü]or[ou]s[pb]u|[^a-zəşçğıöü][kqg][aəe]h[pb][eə]|[^a-zəşçğıöü]yarr?ak|[^a-zəşçğıöü]göt[^a-zəşçğıöü]|[^a-zəşçğıöü]götü[^a-zəşçğıöü]|[^a-zəşçğıöü]götün|[^a-zəşçğıöü]g[öo]tver|[^a-zəşçğıöü]piç|[^a-zəşçğıöü]ibne|[^a-zəşçğıöü]puşt|[^a-zəşçğıöü]pezeven|[^a-zəşçğıöü][gq]avat|[^a-zəşçğıöü]yav[şs]ak|[^a-zəşçğıöü][kq]alta[kq]|[^a-zəşçğıöü]s[üu]rt[üu]k|[^a-zəşçğıöü][kq]anc[ıi][kq]|[^a-zəşçğıöü][dt]a[şs]+a[kq]|[^a-zəşçğıöü]d[ao]lba[yj]|[^a-zəşçğıöü]gi[cj]d[ıi]l|[^a-zəşçğıöü][şs][eə]r[eə]fsiz|[^a-zəşçğıöü]oç[^a-zəşçğıöü]|[^a-zəşçğıöü]bl[yj]a[td]|[^a-zəşçğıöü]suka[^a-zəşçğıöü]|[^a-zəşçğıöü]pizd|[^a-zəşçğıöü]nahuy|[^a-zəşçğıöü]yebat|[^a-zəşçğıöü]pid[oa]r|[^a-zəşçğıöü]pidr|[^a-zəşçğıöü]shit[^a-zəşçğıöü]|[^a-zəşçğıöü]bitch|[^a-zəşçğıöü]asshole|[^a-zəşçğıöü]it ?o[ğg]lu[^a-zəşçğıöü]|[^a-zəşçğıöü]köp[eə]k ?o[ğg]lu[^a-zəşçğıöü]|fuck)/))"
           },
           "e": {
             ".validate": "newData.isNumber() && (newData.val() === now || newData.val() === data.val())"
@@ -130,10 +130,10 @@
           ".validate": "(data.exists() && newData.val() === data.val()) || (!data.exists() && (newData.val() === 'teklif' || newData.val() === 'istek' || newData.val() === 'xeta' || newData.val() === 'diger'))"
         },
         "ti": {
-          ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 80 && (!data.exists() || newData.val() === data.val())"
+          ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 80 && (!data.exists() || newData.val() === data.val()) && !(' ' + newData.val().toLowerCase().replace('̇', '') + ' ').matches(/([^a-zəşçğıöü]sik[^akil]|[^a-zəşçğıöü]sika[^y]|[^a-zəşçğıöü]sikk[^eə]|[^a-zəşçğıöü]siki[^ncl]|[^a-zəşçğıöü]amc[ıi]|[^a-zəşçğıöü]amına|[^a-zəşçğıöü]amını|[^a-zəşçğıöü]am[ıi]na ?[kq]o[iy]|[^a-zəşçğıöü]am[kq][^a-zəşçğıöü]|[^a-zəşçğıöü]or[ou]s[pb]u|[^a-zəşçğıöü][kqg][aəe]h[pb][eə]|[^a-zəşçğıöü]yarr?ak|[^a-zəşçğıöü]göt[^a-zəşçğıöü]|[^a-zəşçğıöü]götü[^a-zəşçğıöü]|[^a-zəşçğıöü]götün|[^a-zəşçğıöü]g[öo]tver|[^a-zəşçğıöü]piç|[^a-zəşçğıöü]ibne|[^a-zəşçğıöü]puşt|[^a-zəşçğıöü]pezeven|[^a-zəşçğıöü][gq]avat|[^a-zəşçğıöü]yav[şs]ak|[^a-zəşçğıöü][kq]alta[kq]|[^a-zəşçğıöü]s[üu]rt[üu]k|[^a-zəşçğıöü][kq]anc[ıi][kq]|[^a-zəşçğıöü][dt]a[şs]+a[kq]|[^a-zəşçğıöü]d[ao]lba[yj]|[^a-zəşçğıöü]gi[cj]d[ıi]l|[^a-zəşçğıöü][şs][eə]r[eə]fsiz|[^a-zəşçğıöü]oç[^a-zəşçğıöü]|[^a-zəşçğıöü]bl[yj]a[td]|[^a-zəşçğıöü]suka[^a-zəşçğıöü]|[^a-zəşçğıöü]pizd|[^a-zəşçğıöü]nahuy|[^a-zəşçğıöü]yebat|[^a-zəşçğıöü]pid[oa]r|[^a-zəşçğıöü]pidr|[^a-zəşçğıöü]shit[^a-zəşçğıöü]|[^a-zəşçğıöü]bitch|[^a-zəşçğıöü]asshole|[^a-zəşçğıöü]it ?o[ğg]lu[^a-zəşçğıöü]|[^a-zəşçğıöü]köp[eə]k ?o[ğg]lu[^a-zəşçğıöü]|fuck)/)"
         },
         "t": {
-          ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 1000 && (!data.exists() || newData.val() === data.val())"
+          ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 1000 && (!data.exists() || newData.val() === data.val()) && !(' ' + newData.val().toLowerCase().replace('̇', '') + ' ').matches(/([^a-zəşçğıöü]sik[^akil]|[^a-zəşçğıöü]sika[^y]|[^a-zəşçğıöü]sikk[^eə]|[^a-zəşçğıöü]siki[^ncl]|[^a-zəşçğıöü]amc[ıi]|[^a-zəşçğıöü]amına|[^a-zəşçğıöü]amını|[^a-zəşçğıöü]am[ıi]na ?[kq]o[iy]|[^a-zəşçğıöü]am[kq][^a-zəşçğıöü]|[^a-zəşçğıöü]or[ou]s[pb]u|[^a-zəşçğıöü][kqg][aəe]h[pb][eə]|[^a-zəşçğıöü]yarr?ak|[^a-zəşçğıöü]göt[^a-zəşçğıöü]|[^a-zəşçğıöü]götü[^a-zəşçğıöü]|[^a-zəşçğıöü]götün|[^a-zəşçğıöü]g[öo]tver|[^a-zəşçğıöü]piç|[^a-zəşçğıöü]ibne|[^a-zəşçğıöü]puşt|[^a-zəşçğıöü]pezeven|[^a-zəşçğıöü][gq]avat|[^a-zəşçğıöü]yav[şs]ak|[^a-zəşçğıöü][kq]alta[kq]|[^a-zəşçğıöü]s[üu]rt[üu]k|[^a-zəşçğıöü][kq]anc[ıi][kq]|[^a-zəşçğıöü][dt]a[şs]+a[kq]|[^a-zəşçğıöü]d[ao]lba[yj]|[^a-zəşçğıöü]gi[cj]d[ıi]l|[^a-zəşçğıöü][şs][eə]r[eə]fsiz|[^a-zəşçğıöü]oç[^a-zəşçğıöü]|[^a-zəşçğıöü]bl[yj]a[td]|[^a-zəşçğıöü]suka[^a-zəşçğıöü]|[^a-zəşçğıöü]pizd|[^a-zəşçğıöü]nahuy|[^a-zəşçğıöü]yebat|[^a-zəşçğıöü]pid[oa]r|[^a-zəşçğıöü]pidr|[^a-zəşçğıöü]shit[^a-zəşçğıöü]|[^a-zəşçğıöü]bitch|[^a-zəşçğıöü]asshole|[^a-zəşçğıöü]it ?o[ğg]lu[^a-zəşçğıöü]|[^a-zəşçğıöü]köp[eə]k ?o[ğg]lu[^a-zəşçğıöü]|fuck)/)"
         },
         "ts": {
           ".validate": "newData.isNumber() && ((data.exists() && newData.val() === data.val()) || (!data.exists() && newData.val() === now))"
@@ -239,6 +239,39 @@
           },
           "$other": {
             ".validate": false
+          }
+        }
+      }
+    },
+    "reports": {
+      ".read": "auth != null && (root.child('roles').child(auth.uid).val() === 'admin' || root.child('roles').child(auth.uid).val() === 'owner')",
+      "$item": {
+        "$cid": {
+          ".write": "auth != null && (root.child('roles').child(auth.uid).val() === 'admin' || root.child('roles').child(auth.uid).val() === 'owner') && !newData.exists()",
+          "$uid": {
+            ".read": "auth != null && auth.uid === $uid",
+            ".write": "auth != null && auth.uid === $uid && auth.token.firebase.sign_in_provider !== 'anonymous' && !root.child('bans').child(auth.uid).exists() && newData.exists() && root.child('comments').child($item).child($cid).exists()",
+            ".validate": "newData.hasChildren(['r','ts'])",
+            "r": {
+              ".validate": "newData.val() === 'insult' || newData.val() === 'spam' || newData.val() === 'other'"
+            },
+            "ts": {
+              ".validate": "newData.val() === now"
+            },
+            "$other": {
+              ".validate": false
+            }
+          }
+        }
+      }
+    },
+    "myrep": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        "$item": {
+          "$cid": {
+            ".write": "auth != null && auth.uid === $uid",
+            ".validate": "newData.val() === true"
           }
         }
       }

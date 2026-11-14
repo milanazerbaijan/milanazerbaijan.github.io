@@ -194,6 +194,7 @@
     if(!ti){msg.textContent='Başlıq yazın.';f.ti.focus();return}
     if(!t){msg.textContent='Mətn yazın.';f.t.focus();return}
     if(ti.length>TMAX||t.length>XMAX){msg.textContent='Mətn çox uzundur.';return}
+    if(MA.isBad&&(MA.isBad(ti)||MA.isBad(t))){msg.textContent=MA.BAD_MSG;return}
     if(st().banned)return;
     var wait=lastS+GAP-MA.now();
     if(uid()&&wait>0){msg.textContent='Növbəti təklif üçün '+Math.ceil(wait/60000)+' dəqiqə gözləyin.';return}
