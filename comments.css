@@ -149,3 +149,17 @@ dialog.cmd::backdrop{background:rgba(0,0,0,.45)}
 .shmenu .shb{border:0;border-radius:9px;height:40px;justify-content:flex-start;background:none}
 .shmenu .shb:hover,.shmenu .shb:focus-visible{background:var(--chip)}
 .shmenu .shb.done{background:none}
+
+/* ===== Telefonda kart reaksiyaları: 👍 👎 + ===== */
+.rxm{display:none;align-items:center;gap:4px;height:32px;min-width:32px;justify-content:center;padding:0 8px;border-radius:999px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-size:13px;font-weight:700;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.rxm .e{font-size:16px;line-height:1;font-weight:600}
+.rxm .n:empty{display:none}
+.rxm[aria-pressed="true"]{background:var(--tag-bg);border-color:var(--red);color:var(--tag-ink)}
+.rxm:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.rxpop{display:contents}
+@media (max-width:600px){
+  .rx-on .rx.rxc{position:relative;flex-wrap:nowrap}
+  .rxm{display:inline-flex}
+  .rxc .rxpop{display:none;position:absolute;bottom:calc(100% + 8px);z-index:20;gap:5px;padding:6px;border-radius:999px;border:1px solid var(--line);background:var(--surface);box-shadow:0 8px 24px rgba(0,0,0,.18)}
+  .rxc.rx-open .rxpop{display:flex}
+}

@@ -69,9 +69,48 @@
       b.innerHTML=IC.share;rx.appendChild(b);
     });
   }
+  /* ===== Telefonda kart reaksiyaları: 👍 👎 + (qalanlar "+" menyusunda) =====
+     Böyük ekranda .rxpop "display:contents" olur və hamısı əvvəlki kimi bir sırada görünür. */
+  var MORE=['love','fire','wow','sad'];
+  function rxCompact(){
+    Array.prototype.forEach.call(document.querySelectorAll('.rx[data-rx]'),function(rx){
+      if(rx.closest('.rxbox')||rx.querySelector('.rxm'))return;
+      var dis=rx.querySelector('.rb[data-r="dislike"]');if(!dis)return;
+      var m=document.createElement('button');m.type='button';m.className='rxm';
+      m.setAttribute('aria-label','Digər reaksiyalar');m.setAttribute('aria-expanded','false');m.title='Digər reaksiyalar';
+      m.innerHTML='<span class="e" aria-hidden="true">+</span><span class="n"></span>';
+      var pop=document.createElement('span');pop.className='rxpop';
+      MORE.forEach(function(k){var b=rx.querySelector('.rb[data-r="'+k+'"]');if(b)pop.appendChild(b)});
+      dis.after(m,pop);rx.classList.add('rxc');
+      var sync=function(){rxSync(m,pop)};sync();
+      try{new MutationObserver(sync).observe(pop,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['aria-pressed']})}catch(e){}
+    });
+  }
+  /* "+" düyməsi: seçdiyiniz gizli reaksiya varsa onu, yoxdursa "+" və digər reaksiyaların cəmini göstərir */
+  function rxSync(m,pop){
+    var mine=pop.querySelector('.rb[aria-pressed="true"]'), sum=0;
+    Array.prototype.forEach.call(pop.querySelectorAll('.rb .n'),function(n){sum+=parseInt(n.textContent,10)||0});
+    m.querySelector('.e').textContent=mine?mine.querySelector('.e').textContent:'+';
+    m.querySelector('.n').textContent=sum?sum:'';
+    m.setAttribute('aria-pressed',mine?'true':'false');
+  }
+  function rxClose(except){Array.prototype.forEach.call(document.querySelectorAll('.rx.rx-open'),function(r){if(r!==except){r.classList.remove('rx-open');var m=r.querySelector('.rxm');if(m)m.setAttribute('aria-expanded','false')}})}
+  document.addEventListener('click',function(e){
+    var m=e.target.closest&&e.target.closest('.rxm');
+    if(m){
+      e.preventDefault();var rx=m.closest('.rx'), open=!rx.classList.contains('rx-open');
+      rxClose(rx);rx.classList.toggle('rx-open',open);m.setAttribute('aria-expanded',open?'true':'false');
+      if(open){var pop=rx.querySelector('.rxpop');pop.style.left=Math.max(0,m.offsetLeft-6)+'px'}
+      return;
+    }
+    if(e.target.closest&&e.target.closest('.rxpop .rb')){setTimeout(function(){rxClose(null)},250);return}
+    if(!(e.target.closest&&e.target.closest('.rxpop')))rxClose(null);
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')rxClose(null)});
+
   function scan(){articleRow();cardIcons()}
-  document.addEventListener('ma:render',function(){setTimeout(scan,0)});
-  scan();
+  document.addEventListener('ma:render',function(){rxCompact();setTimeout(scan,0)});
+  rxCompact();scan();
 
   /* kart menyusu */
   var menu=null;
