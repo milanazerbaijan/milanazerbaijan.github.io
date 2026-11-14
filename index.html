@@ -153,6 +153,9 @@ footer .wrap{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap}
 .legend i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:4px;vertical-align:0}
 .tgl{margin-top:8px;border:0;background:none;color:var(--red-ink);font-weight:600;font-size:12.5px;cursor:pointer;padding:2px 0}
 .pos{display:flex;gap:10px;margin:2px 0 12px}
+.seg{display:flex;gap:4px;background:var(--chip);border-radius:10px;padding:3px;margin:8px 0 10px}
+.seg button{flex:1;border:0;background:none;border-radius:8px;padding:7px 8px;font:inherit;font-size:13px;font-weight:600;color:var(--ink-2);cursor:pointer}
+.seg button[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.12)}
 .pos div{flex:1;background:var(--chip);border-radius:10px;padding:9px 10px}
 .pos b{display:block;font-size:22px;font-weight:800;letter-spacing:-.02em;line-height:1.1}
 .pos span{font-size:11.5px;color:var(--ink-3)}
@@ -336,20 +339,27 @@ footer .wrap{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap}
   function foot(o){if(!o)return'';var u=safeUrl(o.sourceUrl);var t=o.updatedAt?'Yeniləndi: '+dayLabel(o.updatedAt)+', '+timeLabel(o.updatedAt):'';return '<div class="foot">'+(o.source?'Mənbə: '+(u?'<a href="'+esc(u)+'" target="_blank" rel="noopener noreferrer">'+esc(o.source)+'</a>':esc(o.source)):'')+(t?'<br>'+esc(t):'')+'</div>'}
   function zoneOf(z,p){for(var i=0;i<(z||[]).length;i++)if(p>=z[i].from&&p<=z[i].to)return z[i].cls;return''}
   function legend(z){return '<div class="legend">'+(z||[]).map(function(x){var c={z1:'#1f8f4e',z2:'#d08a12',z3:'var(--red)'}[x.cls]||'#999';return '<span><i style="background:'+c+'"></i>'+esc(x.label)+'</span>'}).join('')+'</div>'}
-  function table(o,key,winSize){
+  function table(o,key,winSize,bare){
     if(!o||!o.rows||!o.rows.length)return'';
     var rows=o.rows.slice().sort(function(a,b){return a.pos-b.pos});
     var me=rows.filter(function(r){return r.team==='Milan'})[0];
     var open=state['open_'+key];
     var show=rows;
     if(winSize&&me&&!open){var i=rows.indexOf(me);var a=Math.max(0,Math.min(i-winSize,rows.length-(2*winSize+1)));show=rows.slice(a,a+2*winSize+1)}
-    var h='<div class="w"><h5>'+esc(o.title||'')+'</h5>'+(o.note?'<p class="sub">'+esc(o.note)+'</p>':'');
+    var h=(bare?'':'<div class="w"><h5>'+esc(o.title||'')+'</h5>')+(o.note?'<p class="sub">'+esc(o.note)+'</p>':'');
     if(me)h+='<div class="pos"><div><b>'+me.pos+'.</b><span>Milanın yeri</span></div><div><b>'+me.pts+'</b><span>xal</span></div><div><b>'+me.w+'-'+me.d+'-'+me.l+'</b><span>Q-H-M</span></div></div>';
     h+='<table class="tbl"><thead><tr><th>#</th><th>Komanda</th><th>O</th><th>TF</th><th>X</th></tr></thead><tbody>';
     show.forEach(function(r){h+='<tr class="'+zoneOf(o.zones,r.pos)+(r.team==='Milan'?' me':'')+'"><td>'+r.pos+'</td><td><span class="tm">'+crest(r.team)+'<span>'+esc(r.team)+'</span></span></td><td>'+r.p+'</td><td>'+(r.gd>0?'+':'')+r.gd+'</td><td class="pts">'+r.pts+'</td></tr>'});
     h+='</tbody></table>'+legend(o.zones);
     if(winSize&&me&&rows.length>show.length||open)h+='<button class="tgl" type="button" data-open="'+key+'">'+(open?'Qısa göstər':'Tam cədvəl ('+rows.length+' komanda)')+'</button>';
-    return h+foot(o)+'</div>';
+    return h+foot(o)+(bare?'':'</div>');
+  }
+  function standings(){
+    var L=[['sa',W.serieA,0],['el',W.europaLeague,4]].filter(function(x){return x[1]&&x[1].rows&&x[1].rows.length});
+    if(!L.length)return'';
+    if(L.length===1)return table(L[0][1],L[0][0],L[0][2]);
+    var cur=L.filter(function(x){return x[0]===state.lg})[0]||L[0];
+    return '<div class="w"><h5>Turnir cədvəli</h5><div class="seg" role="tablist" aria-label="Turnir">'+L.map(function(x){return '<button type="button" role="tab" data-lg="'+x[0]+'" aria-selected="'+(x===cur)+'">'+esc(x[1].title||x[0])+'</button>'}).join('')+'</div><div role="tabpanel">'+table(cur[1],cur[0],cur[2],1)+'</div></div>';
   }
   function fixtures(o){
     if(!o||!o.items||!o.items.length)return'';
@@ -375,8 +385,8 @@ footer .wrap{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap}
     h+=o.items.map(function(x){return '<div class="inj"><div class="h">'+esc(x.player)+(x.pos?'<small>'+esc(x.pos)+'</small>':'')+'<span class="st '+esc(x.status||'injured')+'">'+esc(ST[x.status]||'Zədəli')+'</span></div>'+(x.reason?'<p>'+esc(x.reason)+'</p>':'')+(x.ret?'<p class="r"><b>Qayıdış:</b> '+esc(x.ret)+'</p>':'')+'</div>'}).join('');
     return h+foot(o)+'</div>';
   }
-  function asideHTML(){return fixtures(W.fixtures)+table(W.serieA,'sa',0)+table(W.europaLeague,'el',4)+scorers(W.scorers)+injuries(W.injuries)}
-  function bindAside(el){Array.prototype.forEach.call(el.querySelectorAll('[data-open]'),function(b){b.onclick=function(){var k='open_'+b.getAttribute('data-open');state[k]=!state[k];var box=b.closest('.aside');box.innerHTML=asideHTML();bindAside(box)}})}
+  function asideHTML(){return fixtures(W.fixtures)+standings()+scorers(W.scorers)+injuries(W.injuries)}
+  function bindAside(el){Array.prototype.forEach.call(el.querySelectorAll('[data-open]'),function(b){b.onclick=function(){var k='open_'+b.getAttribute('data-open');state[k]=!state[k];var box=b.closest('.aside');box.innerHTML=asideHTML();bindAside(box)}});Array.prototype.forEach.call(el.querySelectorAll('[data-lg]'),function(b){b.onclick=function(){state.lg=b.getAttribute('data-lg');var box=b.closest('.aside');box.innerHTML=asideHTML();bindAside(box);var n=box.querySelector('[data-lg="'+state.lg+'"]');if(n)n.focus()}})}
   function renderTables(){
     document.title='Cədvəl və statistika — Milan Azərbaycan';
     app.innerHTML=tabs('c')+'<div class="aside page" style="padding-top:14px">'+(asideHTML()||'<div class="empty">Məlumat yoxdur.</div>')+'</div>';
