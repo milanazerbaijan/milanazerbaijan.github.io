@@ -179,14 +179,47 @@
     cur.ref.on('value',function(s){
       var list=[];
       s.forEach(function(ch){var v=ch.val();if(v&&typeof v==='object'&&typeof v.u==='string'&&cidOk(ch.key)){v.id=ch.key;list.push(v)}});
+      var first=!cur.loaded;
       cur.list=list;cur.loaded=true;
       list.forEach(function(c){watchUser(c.u)});
       paintList();
+      if(first&&goCm===item){goCm=null;setTimeout(function(){try{el.scrollIntoView({behavior:'smooth',block:'start'})}catch(e){el.scrollIntoView()}},60)}
     },function(){var l=document.getElementById('cmList');if(l)l.innerHTML='<p class="cmempty">Şərhləri yükləmək alınmadı.</p>'});
     watchHidden();
     paintCompose();
   }
   document.addEventListener('ma:render',mount);
+
+  /* ---------- xəbər kartlarında şərh sayı (reaksiyaların sağında) ---------- */
+  var ICON_CM='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1 1 21 12z"/></svg>';
+  var CC={}, ccWatched={}, goCm=null;
+  function ccLabel(n){return n?n+' şərh':'Şərh yaz'}
+  function ccPaint(id){
+    var n=CC[id]||0;
+    Array.prototype.forEach.call(document.querySelectorAll('.cc[data-cc="'+id+'"]'),function(a){
+      a.querySelector('.n').textContent=n?n:'';a.title=ccLabel(n);a.setAttribute('aria-label',ccLabel(n));a.classList.toggle('has',n>0);
+    });
+  }
+  function ccWatch(id){
+    if(ccWatched[id])return;ccWatched[id]=1;
+    db.ref('comments/'+id).on('value',function(s){
+      var n=0;s.forEach(function(c){var v=c.val();if(v&&!v.d&&!v.h&&typeof v.t==='string')n++});
+      CC[id]=n;ccPaint(id);
+    },function(){});
+  }
+  function ccScan(){
+    Array.prototype.forEach.call(document.querySelectorAll('.rx[data-rx]'),function(rx){
+      if(rx.closest('.rxbox')||rx.querySelector('.cc'))return;
+      var id=rx.getAttribute('data-rx');if(!idOk(id))return;
+      var a=document.createElement('a');
+      a.className='cc';a.href='#/xeber/'+encodeURIComponent(id);a.setAttribute('data-cc',id);
+      a.innerHTML=ICON_CM+'<span class="n"></span>';
+      rx.appendChild(a);ccWatch(id);ccPaint(id);
+    });
+  }
+  document.addEventListener('ma:render',ccScan);
+  document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a.cc');if(a)goCm=a.getAttribute('data-cc')},true);
+  ccScan();
   window.addEventListener('hashchange',function(){setTimeout(mount,0)});
 
   function paintAll(){paintAcct();paintCompose();paintList();fire()}

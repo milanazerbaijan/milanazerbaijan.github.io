@@ -120,3 +120,13 @@ dialog.cmd::backdrop{background:rgba(0,0,0,.45)}
 .sgmod .cmfb{margin-top:0;justify-content:flex-end}
 @media (max-width:600px){nav.tabs a{font-size:13px}.sgl select{min-width:0}.sgfields .sgl:first-child{flex:1 1 100%}}
 @media (max-width:400px){nav.tabs{gap:3px}nav.tabs a{font-size:12.5px}}
+
+/* xəbər kartında şərh sayı */
+.cc{display:inline-flex;align-items:center;gap:5px;height:32px;padding:0 10px;margin-left:6px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink-3);text-decoration:none;font-size:13px;font-weight:700;font-variant-numeric:tabular-nums;position:relative;transition:border-color .15s,color .15s}
+.cc:before{content:"";position:absolute;left:-7px;top:7px;bottom:7px;width:1px;background:var(--line)}
+.cc svg{width:16px;height:16px;flex:none}
+.cc .n:empty{display:none}
+.cc:hover{border-color:var(--ink-3);color:var(--ink)}
+.cc.has{color:var(--ink-2)}
+.cc:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+@media (max-width:600px){.cc{margin-left:0}.cc:before{display:none}}
