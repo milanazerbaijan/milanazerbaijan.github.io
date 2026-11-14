@@ -195,9 +195,9 @@
   var CC={}, ccWatched={}, goCm=null;
   function ccLabel(n){return n?n+' şərh':'Şərh yaz'}
   function ccPaint(id){
-    var n=CC[id]||0;
+    var n=CC[id]||0, known=CC[id]!=null;
     Array.prototype.forEach.call(document.querySelectorAll('.cc[data-cc="'+id+'"]'),function(a){
-      a.querySelector('.n').textContent=n?n:'';a.title=ccLabel(n);a.setAttribute('aria-label',ccLabel(n));a.classList.toggle('has',n>0);
+      a.querySelector('.n').textContent=known?n:'';a.title=ccLabel(n);a.setAttribute('aria-label',ccLabel(n));a.classList.toggle('has',n>0);
     });
   }
   function ccWatch(id){
