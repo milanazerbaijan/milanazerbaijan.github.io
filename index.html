@@ -26,7 +26,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="comments.css?v=202611141322">
+<link rel="stylesheet" href="comments.css?v=202611141337">
 <script>
   (function(){var t=null;try{t=localStorage.getItem('ma-theme')}catch(e){}
   if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);})();
@@ -308,7 +308,28 @@ footer .wrap{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap}
   }
 
 
-  function tabs(on){return '<nav class="tabs" aria-label="Bölmələr"><a href="#/" class="'+(on==='x'?'on':'')+'">Xəbərlər</a><a href="#/cedvel" class="mob '+(on==='c'?'on':'')+'">Cədvəl</a><a href="#/teklifler" class="'+(on==='t'?'on':'')+'">Təkliflər</a><a href="#/haqqimizda" class="'+(on==='h'?'on':'')+'">Haqqımızda</a></nav>'}
+  var NAVI={
+    news:'<path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/>',
+    table:'<path d="M10 12h11"/><path d="M10 18h11"/><path d="M10 6h11"/><path d="M4 10h2"/><path d="M4 6h1v4"/><path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"/>',
+    target:'<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>',
+    bulb:'<path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/>',
+    info:'<circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>',
+    menu:'<path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/>'
+  };
+  function nicon(k){return '<svg class="ni" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+NAVI[k]+'</svg>'}
+  /* [açar, ünvan, ad, ikon, sinif]: "mob" yalnız telefonda, "xtra" telefonda yalnız ☰ menyusunda */
+  var TABS=[['x','#/','Xəbərlər','news',''],['c','#/cedvel','Cədvəl','table','mob'],['p','#/proqnoz','Proqnoz','target',''],['t','#/teklifler','Təkliflər','bulb','xtra'],['h','#/haqqimizda','Haqqımızda','info','xtra']];
+  function tabs(on){
+    return '<nav class="tabs" aria-label="Bölmələr"><button type="button" class="tabm" aria-label="Menyu" aria-expanded="false" aria-controls="tabmenu">'+nicon('menu')+'</button>'+
+      TABS.map(function(t){return '<a href="'+t[1]+'" class="'+t[4]+(on===t[0]?' on':'')+'"'+(on===t[0]?' aria-current="page"':'')+'>'+nicon(t[3])+'<span>'+t[2]+'</span></a>'}).join('')+
+      '<div class="tabmenu" id="tabmenu" hidden>'+TABS.map(function(t){return '<a href="'+t[1]+'" class="'+(on===t[0]?'on':'')+'">'+nicon(t[3])+'<span>'+t[2]+'</span></a>'}).join('')+'</div></nav>';
+  }
+  document.addEventListener('click',function(e){
+    var b=e.target.closest&&e.target.closest('.tabm'), m=document.getElementById('tabmenu');
+    if(b){var open=b.getAttribute('aria-expanded')!=='true';b.setAttribute('aria-expanded',open);if(m)m.hidden=!open;return}
+    if(m&&!m.hidden&&!(e.target.closest&&e.target.closest('.tabmenu'))){m.hidden=true;var t=document.querySelector('.tabm');if(t)t.setAttribute('aria-expanded','false')}
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'){var m=document.getElementById('tabmenu');if(m&&!m.hidden){m.hidden=true;var t=document.querySelector('.tabm');if(t){t.setAttribute('aria-expanded','false');t.focus()}}}});
   var REACTS=[['like','👍','Bəyəndim'],['dislike','👎','Bəyənmədim'],['love','❤️','Sevdim'],['fire','🔥','Möhtəşəm'],['wow','😮','Təəccüblü'],['sad','😢','Kədərli']];
   function rxBar(id){return '<div class="rx" data-rx="'+esc(id)+'" role="group" aria-label="Reaksiyalar">'+REACTS.map(function(r){return '<button type="button" class="rb" data-r="'+r[0]+'" aria-pressed="false" title="'+r[2]+'" aria-label="'+r[2]+'"><span class="e" aria-hidden="true">'+r[1]+'</span><span class="n"></span></button>'}).join('')+'</div>'}
   function rendered(){try{document.dispatchEvent(new Event('ma:render'))}catch(e){}}
@@ -430,6 +451,12 @@ footer .wrap{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap}
     window.scrollTo(0,0);rendered();
   }
 
+  function renderPred(){
+    document.title='Proqnoz oyunu — Milan Azərbaycan';
+    app.innerHTML=tabs('p')+'<section class="pd" id="pd"><h1>Proqnoz oyunu</h1><div class="empty">Yüklənir…</div></section>';
+    window.scrollTo(0,0);rendered();
+  }
+
   var listScroll=0;
   function route(){
     var m=location.hash.match(/^#\/xeber\/(.+)$/);
@@ -437,6 +464,7 @@ footer .wrap{display:flex;gap:12px;justify-content:space-between;flex-wrap:wrap}
     else if(location.hash==='#/cedvel'){renderTables()}
     else if(location.hash==='#/haqqimizda'){renderAbout()}
     else if(location.hash==='#/teklifler'){renderSugg()}
+    else if(location.hash==='#/proqnoz'){renderPred()}
     else{renderList();window.scrollTo(0,listScroll)}
   }
   document.addEventListener('error',function(e){var im=e.target;if(!im||im.tagName!=='IMG')return;
@@ -530,8 +558,9 @@ var FIREBASE_CONFIG = {
   }catch(e){}
 })();
 </script>
-<script src="comments.js?v=202611141322"></script>
-<script src="suggestions.js?v=202611141322"></script>
-<script src="share.js?v=202611141322"></script>
+<script src="comments.js?v=202611141337"></script>
+<script src="suggestions.js?v=202611141337"></script>
+<script src="share.js?v=202611141337"></script>
+<script src="predictions.js?v=202611141337"></script>
 </body>
 </html>
