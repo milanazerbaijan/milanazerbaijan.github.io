@@ -1,6 +1,36 @@
 {
- "generated": "2026-11-15T07:59:52Z",
+ "generated": "2026-11-15T13:50:07Z",
  "items": [
+  {
+   "id": "20261115-1438-1",
+   "kind": "Zədə",
+   "title": "Xəbər: Milan müdafiəsinə xoş xəbər — Pavlović sabah ümumi qrupla məşqə qayıdır!",
+   "body": "La Gazzetta dello Sport-un yazdığına görə, Strahinja Pavlović fiziki problemini geridə qoyub və Milanelloda məşqlər bərpa olunanda komanda ilə birlikdə işləyəcək. Serb müdafiəçi derbidən sonra Ferencvaros və Genoa oyunlarını buraxmışdı, milli komandaya da qoşula bilməmişdi. İndi hədəfi 22 noyabrda San Siroda Frosinone ilə oyundur, orada start heyətinə qayıtması gözlənilir.\n\nFikayo Tomori-yə də qaçışa icazə verilib: ingilis müdafiəçi Bolonya oyununda bir hissə oynadıqdan sonra fasilə vermişdi və milli komanda fasiləsindən sonra komandaya qoşulmağı hədəfləyir. Loftus-Cheek-in isə ən azı daha bir həftəyə ehtiyacı var; Saelemaekers və Chukwueze-nin bərpası daha uzun çəkəcək.",
+   "summary": "Gazzetta: Pavlović sabah ümumi qrupla məşqə qayıdır, Tomori-yə qaçışa icazə verilib; hər ikisi Frosinone oyununu hədəfləyir",
+   "source": "La Gazzetta dello Sport (Radio Rossonera və Milanreports-a istinadən)",
+   "sourceUrl": "https://www.radiorossonera.it/news/256221023750/milan-frosinone-recupero-pavlovic-tomori-infortunati",
+   "date": "2026-11-15T13:38:00Z"
+  },
+  {
+   "id": "20261115-1438-2",
+   "kind": "Müsahibə",
+   "title": "Origi Milan illərindən danışdı: \"Maldini həqiqətən mənə inanırdı, amma zədəli gəldim\"",
+   "body": "Keçmiş Milan forvardı Divock Origi Belçikanın Het Laatste Nieuws qəzetinə müsahibə verib. 2022-ci ildə Liverpooldan pulsuz keçən belçikalı Milana gəlişini xatırlayıb: \"Milan çox maraqlı layihə idi. Paolo Maldini məni bura gətirmişdi və həqiqətən hiss edirdim ki, mənə inanır.\"\n\nProblemlər isə ilk gündən başlayıb: \"Amma zədəli gəldim. Əsas fiziki formamın böyük hissəsini itirmişdim və buna baxmayaraq dərhal hazır olmalı idim.\" Origi əvvəl adət etdiyi kimi mövsümöncəsi işi edə bilmədiyini və bunun çətin olduğunu deyib.\n\nHeyətdən kənarlaşdırılması barədə: \"Heç nəyi şəxsi qəbul etmirəm. Bu, iş qərarı idi. Bundan razı idimmi? Əlbəttə, yox. Bir müddət komandadan kənarda qaldım və əsas komanda ilə məşq etməyimə icazə verilmirdi.\" Ibrahimović haqqında: \"Zlatan əfsanədir.\"",
+   "summary": "Origi HLN-ə: \"Maldini məni bura gətirmişdi və həqiqətən mənə inanırdı, amma zədəli gəldim\"; heyətdən kənarlaşdırılması barədə",
+   "source": "Het Laatste Nieuws (DirettaCalciomercato və ACMilanInside-a istinadən)",
+   "sourceUrl": "https://www.direttacalciomercato.com/milan-origi-maldini-mi-aveva-portato-qui-e-sentivo-davvero-che-credeva-in-me/",
+   "date": "2026-11-15T13:38:00Z"
+  },
+  {
+   "id": "20261115-1438-3",
+   "kind": "İddia",
+   "title": "İddia: Milan 16 yaşlı Frankfurt istedadı Niko Ilicevic-in arxasınca!",
+   "body": "Calciomercato.com-un məlumatına görə, Milan Eintracht Frankfurt-un 2010-cu il təvəllüdlü istedadı Niko Ilicevic-i yaxından izləyir. Bildirilir ki, o, Bundesliqa tarixində meydana çıxan ən gənc futbolçudur. Rossonerilər gələcək ulduzları vaxtında qazanmaq və Ruben Amorimi dəstəkləmək istəyir.\n\nİddiaya görə, Bobby Gardiner artıq Ilicevic-ə baxmaq üçün skautlar göndərib, Frankfurtdan gələn Markus Krösche-nin klubdakı varlığı isə həlledici ola bilər. Lakin rəqabət çox böyükdür: Sky Sport bir neçə ay əvvəl Inter-in maraq göstərdiyini yazmışdı, Real Madrid, Barselona, Arsenal, Bavariya və Mançester Siti də yarışdadır.",
+   "summary": "İddia (Calciomercato.com): Milan 16 yaşlı Frankfurt istedadı Niko Ilicevic-i izləyir; Inter, Real, Barça, Arsenal, Bayern və City də maraqlanır",
+   "source": "Calciomercato.com (SempreMilan-a istinadən)",
+   "sourceUrl": "https://sempremilan.com/milan-challenging-europe-frankfurt-star",
+   "date": "2026-11-15T13:38:00Z"
+  },
   {
    "id": "20261115-0838-1",
    "kind": "Xəbər",
@@ -970,36 +1000,6 @@
    "source": "SempreMilan",
    "sourceUrl": "https://sempremilan.com/genoa-1-2-ac-milan-report-2026-27",
    "date": "2026-11-08T16:01:03Z"
-  },
-  {
-   "id": "20261108-1408-1",
-   "kind": "Start heyəti",
-   "title": "RƏSMİ: Amorim Genoa oyunu üçün heyəti açıqladı!",
-   "body": "Milan (3-4-2-1): Maignan; Gila, De Winter, Diawara; Moreira, Modrić, Rabiot, Musah; Pulisic, Cissé; Ramos.\n\nEhtiyatda: Torriani, Bouyer, Estupiñan, Vladimirov, Terracciano, Bartesaghi, Comotto, Jashari, Hutchinson, Camarda.\n\nSürpriz seçim: Estupiñan ehtiyatda qalır, sol cinahda Yunus Musah oynayır. Qastrit səbəbindən heyətə düşməyən Pavlović-in yerini mərkəzdə Diawara tutur. Hücumda Ramos-un arxasında Pulisic və Cissé var.\n\nGenoa (3-4-2-1): Bijlow; Marcandalli, Østigård, Vásquez; Ellertsson, Wiafe, Traoré, Ehizibue; Messias, Vitinha; Osmajić. Baş məşqçi: Daniele De Rossi.\n\n⏰ Oyun Bakı vaxtı ilə 18:00-da Marassi stadionunda başlayır (Seriya A, 11-ci tur).",
-   "summary": "Rəsmi: Genoa – Milan start heyəti (3-4-2-1) — Musah sol cinahda, Estupiñan ehtiyatda, Pavlović yoxdur",
-   "source": "AC Milan (Radio Rossonera-ya istinadən)",
-   "sourceUrl": "https://www.acmilan.com/en/news/articles/serie-a/2026-11-08/genoa-vs-ac-milan-the-official-line-ups",
-   "date": "2026-11-08T13:08:15Z"
-  },
-  {
-   "id": "20261108-1350-1",
-   "kind": "İddia",
-   "title": "Camarda yanvarda icarəyə gedə bilər?",
-   "body": "Corriere dello Sport-un iddiasına görə, Milan 18 yaşlı hücumçu Francesco Camarda-nı yanvar transfer pəncərəsində icarəyə göndərməyi nəzərdən keçirir. Məqsəd gənc hücumçunun müntəzəm oyun təcrübəsi qazanmasıdır. Frosinone, Monza, Catanzaro və Pisa artıq onun vəziyyəti ilə maraqlanıb, lakin klub hələ son qərarını verməyib.\n\nCamarda bu mövsüm Seriya A-da 4 oyunda cəmi 41 dəqiqə meydanda olub və heç bir oyuna əsas heyətdə başlamayıb. Avropa Liqasında isə 2 oyunda 83 dəqiqə oynayıb. Hələ qol və ya məhsuldar ötürməsi yoxdur.\n\nPianeta Milan-ın yazdığına görə, Camarda gedərsə, Milan yeni hücumçu axtarmalı olacaq.",
-   "summary": "İddia: Milan Camarda-nı yanvarda icarəyə verməyi düşünür; Frosinone, Monza, Catanzaro və Pisa maraq göstərib",
-   "source": "Corriere dello Sport (Pianeta Milan-a istinadən)",
-   "sourceUrl": "https://www.pianetamilan.it/calciomercato/news-calciomercato/milan-camarda-in-prestito-a-gennaio-primi-sondaggi-in-serie-a-e-b/",
-   "date": "2026-11-08T12:50:00Z"
-  },
-  {
-   "id": "20261108-1350-2",
-   "kind": "Müsahibə",
-   "title": "Pato: \"Milan əvvəlki halına qayıdacaq\"",
-   "body": "Milanın keçmiş hücumçusu Alexandre Pato Braziliyada keçirilən Formula 1 Qran-Prisində Gianluca Di Marzio-nun proqramına danışıb və köhnə klubu haqqında fikirlərini bölüşüb.\n\nBraziliyalı derbini xatırladıb: \"Derbini 10 dəqiqəyə həll etdik. Ümid edirəm, Milan belə oyunları daha çox oynayacaq.\" Pato komandanın gələcəyinə də nikbin baxır: \"Nəticə əldə etmək vaxt tələb edir, amma Milanın əvvəlki halına qayıdacağına əminəm.\"\n\nMilan isə Avropa Liqasında Ferencváros-a 0:2 uduzduqdan sonra bu gün Marassi-də Genoa-ya qonaq olur və Amorimin komandasından reaksiya gözlənilir.",
-   "summary": "Milanın keçmiş hücumçusu Alexandre Pato: \"Nəticə vaxt tələb edir, amma Milanın əvvəlki halına qayıdacağına inanıram\"",
-   "source": "Gianluca Di Marzio (SempreMilan-a istinadən)",
-   "sourceUrl": "https://sempremilan.com/pato-confident-milan-will-return",
-   "date": "2026-11-08T12:50:00Z"
   }
  ],
  "serieA": {
@@ -1731,16 +1731,16 @@
    {
     "player": "Strahinja Pavlović",
     "pos": "MD",
-    "reason": "Böyrək problemi; vəziyyəti gündəlik qiymətləndirilir",
-    "ret": "şübhəli: Frosinone oyunu (22 noyabr)",
+    "reason": "Fiziki problem (Ferencvaros və Genoa oyunlarını buraxıb); sabah ümumi qrupla məşqə qayıdır",
+    "ret": "hədəf: Frosinone oyunu (22 noyabr)",
     "status": "doubt"
    },
    {
     "player": "Fikayo Tomori",
     "pos": "MD",
-    "reason": "Sağ budun arxa əzələsində zədə; yenidən müayinə olunacaq",
-    "ret": "yeni müayinədən asılı: Frosinone (22 noyabr) və ya bir həftə sonra",
-    "status": "injured"
+    "reason": "Sağ budun arxa əzələsində zədə; qaçışa icazə verilib",
+    "ret": "fasilədən sonra qrupa qoşulmaq hədəfi: Frosinone (22 noyabr)",
+    "status": "doubt"
    },
    {
     "player": "Mario Gila",
@@ -1760,7 +1760,7 @@
     "player": "Ruben Loftus-Cheek",
     "pos": "YM",
     "reason": "Sol budun arxa əzələsində zədə; yenidən müayinə olunacaq",
-    "ret": "yeni müayinədən asılı: Frosinone (22 noyabr) və ya bir həftə sonra",
+    "ret": "ən azı daha bir həftə; Olympiacos oyunu çətin, Cagliari (30 noyabr) daha real",
     "status": "injured"
    },
    {
@@ -1785,10 +1785,10 @@
     "status": "injured"
    }
   ],
-  "note": "Milli komanda fasiləsi, 13 noyabr",
-  "source": "Sky Sport Italia (MilanNews və SempreMilan-a istinadən)",
-  "sourceUrl": "https://sempremilan.com/gabbia-admits-january-return-possible",
-  "updatedAt": "2026-11-13T18:55:00Z"
+  "note": "Milli komanda fasiləsi, 15 noyabr",
+  "source": "La Gazzetta dello Sport (Radio Rossonera-ya istinadən)",
+  "sourceUrl": "https://www.radiorossonera.it/news/256221023750/milan-frosinone-recupero-pavlovic-tomori-infortunati",
+  "updatedAt": "2026-11-15T13:38:00Z"
  },
  "scorers": {
   "note": "Seriya A, 11 tur",
