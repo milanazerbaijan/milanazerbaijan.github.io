@@ -1,6 +1,16 @@
 {
- "generated": "2026-11-21T07:49:01Z",
+ "generated": "2026-11-21T14:11:03Z",
  "items": [
+  {
+   "id": "20261121-1440-1",
+   "kind": "Mətbuat konfransı",
+   "title": "Amorim Frosinone oyunu öncəsi danışdı: \"Pavlović heyətdə olacaq\"",
+   "body": "Milanın baş məşqçisi Ruben Amorim sabahkı Milan – Frosinone (bazar, Bakı vaxtı 21:00) oyunu öncəsi mətbuat konfransı keçirdi. Böyrək sancısından əziyyət çəkən Strahinja Pavlović barədə dedi: \"Daha yaxşıdır, heyətə çağırılacaq. Əsas heyətdə başlayacağını bilmirəm, görəcəyik.\"\n\nFrosinone haqqında: \"Çətin oyun gözləyirəm. Onlar sürətli komandadır, ən çox sprint edən komandadır, biz isə ikinciyik.\" Özünütənqid də etdi: \"Son 30 metrə girib orada qalmaqda ən pis komandalardan biriyik\" və \"Turnir cədvəlindəki mövqeyimizdən razı deyiləm.\"\n\nGonçalo Ramos haqqında: \"Ramos çətinlik çəkir, çünki komanda çətinlik çəkir.\" Camarda barədə isə: \"Zövq almalı və növbəti oyunu düşünməlidir.\" Pulisic üçün: \"Bizim bu günümüz və gələcəyimizdir.\"",
+   "summary": "Amorim Frosinone öncəsi: Pavlović heyətdə olacaq, əsas heyət sual altında; \"Cədvəldəki mövqeyimizdən razı deyiləm\"",
+   "source": "Amorimin mətbuat konfransı (Calciomercato.com, MilanReports-a istinadən)",
+   "sourceUrl": "https://www.calciomercato.com/notizie/milan-amorim-pavlovic-sara-convocato-e-vuole-giocare-il-frosinone-e-difficile-da-capire/blte15bd8d94815ed85",
+   "date": "2026-11-21T13:40:00Z"
+  },
   {
    "id": "20261121-0838-1",
    "kind": "Xəbər",
@@ -990,16 +1000,6 @@
    "source": "Corriere dello Sport",
    "sourceUrl": "https://corrieredellosport.it/news/calcio/serie-a/milan/2026/11/13-152558271/il_milan_blinda_rabiot_pronta_lofferta_per_il_rinnovo_la_cifra_da_top_player",
    "date": "2026-11-13T09:50:00Z"
-  },
-  {
-   "id": "20261113-1050-2",
-   "kind": "Müsahibə",
-   "title": "De Rossi: \"Diego Moreira mənə dedi ki, İtaliyada belə şey görməmişdi\"",
-   "body": "Genoa-nın baş məşqçisi Daniele De Rossi SkySport24-ə danışarkən Milanla oyundan sonra Diego Moreira ilə söhbətini xatırladı. Milanın vingeri ona Genoa azarkeşlərinin yaratdığı atmosfer haqqında bunu deyib: \"Bazar günü Diego Moreira gəldi və dedi: \"Burada, İtaliyada heç vaxt belə şey görməmişdim\"\".\n\nDe Rossi bu sözlərlə Genoa-nı başqa klublardan fərqləndirən tribunanı vurğulayıb. Milanla oyun haqqında isə belə deyib: \"Milana uduzduğumuz doğrudur, amma tırnaq içində desək, yaxşı uduzduq, bunu haqq etməmişdik\".\n\nXatırladaq ki, Milan 8 noyabrda Marassi-də Genoa-nı 2-1 hesabı ilə məğlub etmişdi. Moreira hazırda Belçika millisindədir: dünən Türkiyə ilə oyunda start heyətində çıxdı.",
-   "summary": "De Rossi SkySport24-də: Diego Moreira Genoa azarkeşlərinin atmosferi barədə \"İtaliyada belə şey görməmişdim\" deyib; \"Milana yaxşı uduzduq, haqq etməmişdik\"",
-   "source": "SkySport24 (MilanNews-a istinadən)",
-   "sourceUrl": "https://www.milannews.it/l-avversario/de-rossi-genoa-diverso-posti-diego-moreira-partita-che-635972",
-   "date": "2026-11-13T09:50:00Z"
   }
  ],
  "serieA": {
@@ -1731,8 +1731,8 @@
    {
     "player": "Strahinja Pavlović",
     "pos": "MD",
-    "reason": "Bir neçə gündür böyrək sancısı; hələ tam formada deyil (Gazzetta)",
-    "ret": "Frosinone oyununda (22 noyabr) heyətdə, ehtimal ki, ehtiyatda",
+    "reason": "Böyrək sancısı; vəziyyəti yaxşılaşıb (Amorim, 21 noyabr)",
+    "ret": "Frosinone oyununa (22 noyabr) heyətə çağırılacaq, əsas heyətdə başlaması sual altındadır",
     "status": "doubt"
    },
    {
@@ -1785,10 +1785,10 @@
     "status": "doubt"
    }
   ],
-  "note": "Frosinone oyunu öncəsi – 20 noyabr",
-  "source": "La Gazzetta dello Sport (PianetaMilan)",
-  "sourceUrl": "https://www.pianetamilan.it/partite/probabili-formazioni/probabile-formazione-milan-frosinone-due-dubbi-per-amorim-e-i-recuperi/",
-  "updatedAt": "2026-11-20T13:36:00Z"
+  "note": "Frosinone oyunu öncəsi – 21 noyabr",
+  "source": "Amorimin mətbuat konfransı (Calciomercato.com); La Gazzetta dello Sport",
+  "sourceUrl": "https://www.calciomercato.com/notizie/milan-amorim-pavlovic-sara-convocato-e-vuole-giocare-il-frosinone-e-difficile-da-capire/blte15bd8d94815ed85",
+  "updatedAt": "2026-11-21T13:40:00Z"
  },
  "scorers": {
   "note": "Seriya A, 11 tur",
